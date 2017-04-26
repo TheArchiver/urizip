@@ -5,8 +5,6 @@
   const codes = {};
 
   const stack = [ tree ];
-  console.log( stack );
-
 
   while( stack.length ) {
     const node = stack.pop();
