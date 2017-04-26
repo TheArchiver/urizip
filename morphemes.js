@@ -5,7 +5,7 @@
   const word_lines = raw_words.split(/\n/g).map( line => line.trim() );
   const ok_words = word_lines.filter( word => ! /['"]/.test( word ) );
   const MAX = 4;
-  const BOOST = 1200;
+  const BOOST = 334;
   const dict = {};
   ok_words.forEach( word => {
     let w = '';
@@ -23,11 +23,13 @@
         w = char;
       }
     }
+    if ( w.length ) {
+      dict[w] = ( dict[w] || 0 ) + 1;
+    }
   });
-  console.log( Object.keys( dict ).length );
   const raw_boost_words = fs.readFileSync( process.argv[3], { encoding: 'utf8' });
-  const word_lines = raw_boost_words.split(/\n/g).map( line => line.trim() );
-  const ok_boost_words = word_lines.filter( word => ! /['"]/.test( word ) );
+  const boost_word_lines = raw_boost_words.split(/\n/g).map( line => line.trim() );
+  const ok_boost_words = boost_word_lines.filter( word => ! /['"]/.test( word ) );
   ok_boost_words.forEach( word => {
     let w = '';
     for ( const char of word ) {
@@ -39,11 +41,25 @@
         w = char;
       }
     }
+    if ( w.length ) {
+      dict[w] = ( dict[w] || 0 ) + BOOST;
+    }
   });
+  const morphemes = [];
+  let total_cover = 0;
   for ( const morpheme of Object.keys( dict ) ) {
-    morphemes.push( { morpheme, cover: dict[morpheme] * morpheme.length } ); 
+    const cover = dict[morpheme] * morpheme.length;
+    if ( Number.isInteger(cover ) ) {
+      total_cover += cover;
+    } else {
+      throw new TypeError( "not integer", morpheme, cover );
+    }
+    morphemes.push( { morpheme, cover } ); 
   }
   morphemes.sort( (a,b) => b.cover - a.cover );
   morphemes.length = 1024;
+  morphemes.forEach( (m,i) => {
+    morphemes[i] = { morpheme: m.morpheme, cover: m.cover / total_cover };
+  });
   console.log( JSON.stringify( morphemes, null, 2 ));
 }

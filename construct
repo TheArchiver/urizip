@@ -1,0 +1,7 @@
+cd english-words
+git pull
+cd ..
+cd google-10000-english
+git pull
+cd ..
+node morphemes.js english-words/words.txt google-10000-english/google-10000-english-no-swears.txt > dict.json
