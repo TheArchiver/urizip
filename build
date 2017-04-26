@@ -7,3 +7,7 @@ cd ..
 node morphemes.js english-words/words.txt google-10000-english/google-10000-english-no-swears.txt > dict.json
 node huffman.js > tree.json
 node encode.js > codes.json
+git add .
+git commit -m OK
+git push
+
