@@ -2,7 +2,14 @@
 {
   const btoa = require('btoa');
   const codes = JSON.parse( require('fs').readFileSync( "codes.json", {encoding:'utf8'} ) );
+  const tld_codes = JSON.parse( require('fs').readFileSync( "tld_codes.json", {encoding:'utf8'} ) );
   let url = process.argv[2];
+
+  const group_codes = {
+    original: '0',
+    other_common: '10',
+    rest: '11'
+  };
 
   let code = '';
   if ( url.startsWith('http://') ) {
@@ -51,6 +58,23 @@
     }
     console.log("host", host, "port number", portNumber );
   }
+
+  const parts = host.split( '.' )
+  const match = {};
+  for ( const group_name of Object.keys( tld_codes ) ) {
+    const group = tld_codes[group_name];
+    for ( let i = 0; i < parts.length; i++ ) {
+      const test = '.' + parts.slice( i ).join( '.' );
+      if ( test in group ) {
+        match.tld = test; 
+        match.code = group[test];
+        match.domain = host.slice(0, -test.length);
+        match.groupcode = group_codes[group_name];
+        break;
+      }
+    }
+  }
+  console.log( "TLD match", match );
 
 
   console.log( code, url );
