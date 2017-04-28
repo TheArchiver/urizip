@@ -5,6 +5,7 @@
   const codes = JSON.parse( require('fs').readFileSync( "codes.json", {encoding:'utf8'} ) );
   const tld_codes = JSON.parse( require('fs').readFileSync( "tld_codes.json", {encoding:'utf8'} ) );
   let url = process.argv[2];
+  const olength = url.length;
 
   const group_codes = {
     original: '0',
@@ -87,5 +88,8 @@
   console.log( url, path_code  );
 
   const total_code = code + match.groupcode + match.code + code_parts.join('') + path_code;
+  const result = tostring( total_code ).replace( /=/g, '' );
+
   console.log( total_code, tostring( total_code ) );
+  console.log( "% of original", Math.round( result.length / olength * 100 ) );
 }
