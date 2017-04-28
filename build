@@ -8,6 +8,8 @@ cd ..
 node morphemes.js english-words/words.txt google-10000-english/google-10000-english-no-swears.txt > dict.json
 node huffman.js > tree.json
 node encode.js > codes.json
+node parse_tld.js > tld_dict.json
+node tld_huffman.js > tld_tree.json
 git add .
 git commit -m OK
 git push

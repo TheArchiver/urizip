@@ -1,5 +1,38 @@
 "use strict";
 {
+  const fs = require('fs');
+  const tld_stats = JSON.parse( fs.readFileSync( 'tld_stats.json', { encoding: 'utf8' } ) );
+
+  let total = 0;
+  for( const tld_name of Object.keys( tld_stats ) ) {
+    total += tld_stats[tld_name]; 
+  }
+
+  const minimum = 1/total;
+
+  for( const tld_name of Object.keys( tld_stats ) ) {
+    tld_stats[tld_name] = tld_stats[tld_name]/total;
+  }
+
+  function get_freq( tld_name ) {
+    if ( tld_name in tld_stats ) {
+      return tld_stats[tld_name];
+    } else {
+      const tld_parts = tld_name.split('.').filter( part => part.length > 0 );
+      let approximate = 1.0;
+      for ( const part of tld_parts ) {
+        const part_name = "." + part;
+        if ( part_name in tld_stats ) {
+          approximate *= tld_stats[part_name];
+        } else {
+          approximate = minimum;
+          break;
+        }
+      }
+      return approximate;
+    }
+  }
+
   // data 
     // 8 ( 3 bits ) original and infrastructure
     const original = {
@@ -28,31 +61,52 @@
       ".com.cn": "1010",    // china
       ".com.hk": "1011",    // china
       ".io": "1100",      // startups
-      "goo.gl": "1101",      // goo.gl
-      "bit.ly": "1110",      // bit.ly
-      "youtu.be": "1111",      // youtu.be
+      ".gl": "1101",      // goo.gl
+      ".ly": "1110",      // bit.ly
+      ".be": "1111",      // youtu.be
     };
 
-  // extractio and processing
+  // extraction and processing
 
-    const fs = require('fs');
     const tld_raw = fs.readFileSync( 'tld.dat', { encoding: 'utf8' } ).split( /\n/g );
     const tld_names = tld_raw.filter( line => {
       const isEmpty = line.trim().length == 0;
       const isComment = line.startsWith( '//' );
       return ! ( isEmpty || isComment );
     }).sort();
-
-  // output
+    const rest = tld_names.reduce( (r,a) => (r[a] = 1, r ), {} );
 
     const tlds = {
       original,
       other_common,
-      rest : tld_names
+      rest
     };
+
+  // add frequencies
+    
+    const output_tlds = {};
+    for( const dict_name of Object.keys( tlds ) ) {
+      const output = [];
+      output_tlds[dict_name] = output;
+      const dict = tlds[dict_name];
+      for( let tld_name of Object.keys( dict ) ) {
+        if ( tld_name.startsWith( '!' ) ) {
+          continue;
+        } else if ( tld_name.startsWith( '*' ) ) {
+          tld_name = tld_name.slice(1);
+        }
+        if ( ! tld_name.startsWith('.') ) {
+          tld_name = '.' + tld_name;
+        }
+        output.push({ tld: tld_name, cover: get_freq( tld_name ) });
+      }
+    }
+
+
+  // output
 
 
   // there are around 8100 of these so we need 13 bits.
   // but we shall huff code it, to get max 14 bits, min...some amount less
-  console.log( JSON.stringify( tlds, null, 2 ) );
+  console.log( JSON.stringify( output_tlds, null, 2 ) );
 }
