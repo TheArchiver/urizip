@@ -83,6 +83,9 @@
 
   console.log( code, url );
 
-  const total_code = code + match.groupcode + match.code + code_parts.join('');
+  const path_code = shrink( url.toLowerCase() );
+  console.log( url, path_code  );
+
+  const total_code = code + match.groupcode + match.code + code_parts.join('') + path_code;
   console.log( total_code, tostring( total_code ) );
 }
