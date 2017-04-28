@@ -43,7 +43,16 @@
       return ! ( isEmpty || isComment );
     }).sort();
 
+  // output
+
+    const tlds = {
+      original,
+      other_common,
+      rest : tld_names
+    };
+
+
   // there are around 8100 of these so we need 13 bits.
   // but we shall huff code it, to get max 14 bits, min...some amount less
-  console.log( JSON.stringify( tld_names, null, 2 ) );
+  console.log( JSON.stringify( tlds, null, 2 ) );
 }
