@@ -1,3 +1,4 @@
+curl -o tld.dat https://publicsuffix.org/list/effective_tld_names.dat
 cd english-words
 git pull
 cd ..
