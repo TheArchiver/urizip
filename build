@@ -10,6 +10,7 @@ node huffman.js > tree.json
 node encode.js > codes.json
 node parse_tld.js > tld_dict.json
 node tld_huffman.js > tld_tree.json
+node tld_encode.js > tld_codes.json
 git add .
 git commit -m OK
 git push
