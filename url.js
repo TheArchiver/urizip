@@ -1,5 +1,6 @@
 "use strict";
 {
+  const { tostring, shrink } = require('./test.js' );
   const btoa = require('btoa');
   const codes = JSON.parse( require('fs').readFileSync( "codes.json", {encoding:'utf8'} ) );
   const tld_codes = JSON.parse( require('fs').readFileSync( "tld_codes.json", {encoding:'utf8'} ) );
@@ -70,12 +71,18 @@
         match.code = group[test];
         match.domain = host.slice(0, -test.length);
         match.groupcode = group_codes[group_name];
+        parts.length = i;
         break;
       }
     }
   }
   console.log( "TLD match", match );
 
+  const code_parts = parts.map( part => shrink( part ) );
+  console.log( parts, code_parts, match.groupcode, match.code );
 
   console.log( code, url );
+
+  const total_code = code + match.groupcode + match.code + code_parts.join('');
+  console.log( total_code, tostring( total_code ) );
 }

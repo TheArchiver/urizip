@@ -141,12 +141,12 @@
          },
          "right": {
           "left": {
-           "morpheme": "sing",
+           "morpheme": "ors",
            "cover": 0.00034274218034546766,
            "code": "0000010110"
           },
           "right": {
-           "morpheme": "ors",
+           "morpheme": "sing",
            "cover": 0.00034274218034546766,
            "code": "0000010111"
           },
@@ -934,7 +934,7 @@
             "code": "00100000010"
            },
            "right": {
-            "morpheme": "rese",
+            "morpheme": "af",
             "cover": 0.00017968335000326257,
             "code": "00100000011"
            },
@@ -956,7 +956,7 @@
          "left": {
           "left": {
            "left": {
-            "morpheme": "af",
+            "morpheme": "rese",
             "cover": 0.00017968335000326257,
             "code": "00100001000"
            },
@@ -1840,12 +1840,12 @@
          "right": {
           "left": {
            "left": {
-            "morpheme": "trai",
+            "morpheme": "crea",
             "cover": 0.0001914128722085642,
             "code": "00111110100"
            },
            "right": {
-            "morpheme": "crea",
+            "morpheme": "trai",
             "cover": 0.0001914128722085642,
             "code": "00111110101"
            },
@@ -2529,7 +2529,7 @@
             "code": "01001111100"
            },
            "right": {
-            "morpheme": "ua",
+            "morpheme": "rm",
             "cover": 0.00020184937621800582,
             "code": "01001111101"
            },
@@ -2538,7 +2538,7 @@
           },
           "right": {
            "left": {
-            "morpheme": "rm",
+            "morpheme": "ua",
             "cover": 0.00020184937621800582,
             "code": "01001111110"
            },
@@ -2664,7 +2664,7 @@
             "code": "01010110110"
            },
            "right": {
-            "morpheme": "ping",
+            "morpheme": "coo",
             "cover": 0.00020406597883948014,
             "code": "01010110111"
            },
@@ -2681,7 +2681,7 @@
          "left": {
           "left": {
            "left": {
-            "morpheme": "coo",
+            "morpheme": "ping",
             "cover": 0.00020406597883948014,
             "code": "01010111000"
            },
@@ -3394,12 +3394,12 @@
        "right": {
         "left": {
          "left": {
-          "morpheme": "ad",
+          "morpheme": "atio",
           "cover": 0.0008743111965077795,
           "code": "011010100"
          },
          "right": {
-          "morpheme": "atio",
+          "morpheme": "ad",
           "cover": 0.0008743111965077795,
           "code": "011010101"
          },
@@ -3662,7 +3662,7 @@
           },
           "right": {
            "left": {
-            "morpheme": "ever",
+            "morpheme": "mark",
             "cover": 0.00022346125177738051,
             "code": "01110000110"
            },
@@ -3689,7 +3689,7 @@
          "right": {
           "left": {
            "left": {
-            "morpheme": "mark",
+            "morpheme": "ever",
             "cover": 0.00022346125177738051,
             "code": "01110001100"
            },
@@ -3703,12 +3703,12 @@
           },
           "right": {
            "left": {
-            "morpheme": "time",
+            "morpheme": "ners",
             "cover": 0.0002237845063263455,
             "code": "01110001110"
            },
            "right": {
-            "morpheme": "ners",
+            "morpheme": "time",
             "cover": 0.0002237845063263455,
             "code": "01110001111"
            },
@@ -4462,12 +4462,12 @@
          },
          "right": {
           "left": {
-           "morpheme": "the",
+           "morpheme": "and",
            "cover": 0.0004748378428189533,
            "code": "1000011110"
           },
           "right": {
-           "morpheme": "and",
+           "morpheme": "the",
            "cover": 0.0004748378428189533,
            "code": "1000011111"
           },
@@ -5417,12 +5417,12 @@
          "right": {
           "left": {
            "left": {
-            "morpheme": "lit",
+            "morpheme": "ectio",
             "cover": 0.0002583727430656011,
             "code": "10101001100"
            },
            "right": {
-            "morpheme": "ectio",
+            "morpheme": "lit",
             "cover": 0.0002583727430656011,
             "code": "10101001101"
            },
@@ -6003,7 +6003,7 @@
             "code": "10111100100"
            },
            "right": {
-            "morpheme": "port",
+            "morpheme": "ori",
             "cover": 0.00027555141338202714,
             "code": "10111100101"
            },
@@ -6012,7 +6012,7 @@
           },
           "right": {
            "left": {
-            "morpheme": "ori",
+            "morpheme": "port",
             "cover": 0.00027555141338202714,
             "code": "10111100110"
            },
@@ -6443,12 +6443,12 @@
          "left": {
           "left": {
            "left": {
-            "morpheme": "ona",
+            "morpheme": "inf",
             "cover": 0.00029002859925353135,
             "code": "11001101000"
            },
            "right": {
-            "morpheme": "inf",
+            "morpheme": "ona",
             "cover": 0.00029002859925353135,
             "code": "11001101001"
            },
@@ -6760,7 +6760,7 @@
              "code": "110100010110"
             },
             "right": {
-             "morpheme": "alt",
+             "morpheme": "lop",
              "cover": 0.00014719626783227946,
              "code": "110100010111"
             },
@@ -6777,7 +6777,7 @@
           "left": {
            "left": {
             "left": {
-             "morpheme": "lop",
+             "morpheme": "alt",
              "cover": 0.00014719626783227946,
              "code": "110100011000"
             },
@@ -7337,7 +7337,7 @@
              "code": "110111111000"
             },
             "right": {
-             "morpheme": "ato",
+             "morpheme": "card",
              "cover": 0.00015280704321788636,
              "code": "110111111001"
             },
@@ -7346,7 +7346,7 @@
            },
            "right": {
             "left": {
-             "morpheme": "card",
+             "morpheme": "ato",
              "cover": 0.00015280704321788636,
              "code": "110111111010"
             },
@@ -7731,12 +7731,12 @@
           "left": {
            "left": {
             "left": {
-             "morpheme": "esent",
+             "morpheme": "promo",
              "cover": 0.00015689390430122965,
              "code": "111010010000"
             },
             "right": {
-             "morpheme": "promo",
+             "morpheme": "esent",
              "cover": 0.00015689390430122965,
              "code": "111010010001"
             },
@@ -7750,7 +7750,7 @@
              "code": "111010010010"
             },
             "right": {
-             "morpheme": "trave",
+             "morpheme": "oduc",
              "cover": 0.00015700935235443144,
              "code": "111010010011"
             },
@@ -7763,7 +7763,7 @@
           "right": {
            "left": {
             "left": {
-             "morpheme": "oduc",
+             "morpheme": "trave",
              "cover": 0.00015700935235443144,
              "code": "111010010100"
             },
@@ -7903,12 +7903,12 @@
            },
            "right": {
             "left": {
-             "morpheme": "paper",
+             "morpheme": "scree",
              "cover": 0.00015781748872684394,
              "code": "111010100110"
             },
             "right": {
-             "morpheme": "scree",
+             "morpheme": "paper",
              "cover": 0.00015781748872684394,
              "code": "111010100111"
             },
@@ -7984,12 +7984,12 @@
           "left": {
            "left": {
             "left": {
-             "morpheme": "activ",
+             "morpheme": "suppl",
              "cover": 0.00015851017704605468,
              "code": "111010111000"
             },
             "right": {
-             "morpheme": "suppl",
+             "morpheme": "activ",
              "cover": 0.00015851017704605468,
              "code": "111010111001"
             },
@@ -8088,7 +8088,7 @@
              "code": "111011100010"
             },
             "right": {
-             "morpheme": "clea",
+             "morpheme": "trea",
              "cover": 0.0001594106718610286,
              "code": "111011100011"
             },
@@ -8101,7 +8101,7 @@
           "right": {
            "left": {
             "left": {
-             "morpheme": "trea",
+             "morpheme": "clea",
              "cover": 0.0001594106718610286,
              "code": "111011100100"
             },
@@ -8115,12 +8115,12 @@
            },
            "right": {
             "left": {
-             "morpheme": "compo",
+             "morpheme": "repre",
              "cover": 0.00015949148549826986,
              "code": "111011100110"
             },
             "right": {
-             "morpheme": "repre",
+             "morpheme": "compo",
              "cover": 0.00015949148549826986,
              "code": "111011100111"
             },
@@ -8978,12 +8978,12 @@
           "left": {
            "left": {
             "left": {
-             "morpheme": "bre",
+             "morpheme": "add",
              "cover": 0.0001667647128499825,
              "code": "111111000000"
             },
             "right": {
-             "morpheme": "add",
+             "morpheme": "bre",
              "cover": 0.0001667647128499825,
              "code": "111111000001"
             },

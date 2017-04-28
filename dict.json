@@ -444,11 +444,11 @@
     "cover": 0.0008848746933757431
   },
   {
-    "morpheme": "atio",
+    "morpheme": "ad",
     "cover": 0.0008743111965077795
   },
   {
-    "morpheme": "ad",
+    "morpheme": "atio",
     "cover": 0.0008743111965077795
   },
   {
@@ -860,11 +860,11 @@
     "cover": 0.0004785783597426912
   },
   {
-    "morpheme": "and",
+    "morpheme": "the",
     "cover": 0.0004748378428189533
   },
   {
-    "morpheme": "the",
+    "morpheme": "and",
     "cover": 0.0004748378428189533
   },
   {
@@ -1248,11 +1248,11 @@
     "cover": 0.00034320397255827484
   },
   {
-    "morpheme": "ors",
+    "morpheme": "sing",
     "cover": 0.00034274218034546766
   },
   {
-    "morpheme": "sing",
+    "morpheme": "ors",
     "cover": 0.00034274218034546766
   },
   {
@@ -1552,11 +1552,11 @@
     "cover": 0.0002909290940685053
   },
   {
-    "morpheme": "ona",
+    "morpheme": "inf",
     "cover": 0.00029002859925353135
   },
   {
-    "morpheme": "inf",
+    "morpheme": "ona",
     "cover": 0.00029002859925353135
   },
   {
@@ -1660,11 +1660,11 @@
     "cover": 0.00027605938481611506
   },
   {
-    "morpheme": "port",
+    "morpheme": "ori",
     "cover": 0.00027555141338202714
   },
   {
-    "morpheme": "ori",
+    "morpheme": "port",
     "cover": 0.00027555141338202714
   },
   {
@@ -1816,11 +1816,11 @@
     "cover": 0.00025875372164116704
   },
   {
-    "morpheme": "lit",
+    "morpheme": "ectio",
     "cover": 0.0002583727430656011
   },
   {
-    "morpheme": "ectio",
+    "morpheme": "lit",
     "cover": 0.0002583727430656011
   },
   {
@@ -2304,7 +2304,7 @@
     "cover": 0.00022392304399018766
   },
   {
-    "morpheme": "ners",
+    "morpheme": "time",
     "cover": 0.0002237845063263455
   },
   {
@@ -2312,15 +2312,15 @@
     "cover": 0.0002237845063263455
   },
   {
-    "morpheme": "time",
+    "morpheme": "ners",
     "cover": 0.0002237845063263455
   },
   {
-    "morpheme": "ever",
+    "morpheme": "mark",
     "cover": 0.00022346125177738051
   },
   {
-    "morpheme": "mark",
+    "morpheme": "ever",
     "cover": 0.00022346125177738051
   },
   {
@@ -2596,11 +2596,11 @@
     "cover": 0.00020451622624696712
   },
   {
-    "morpheme": "ping",
+    "morpheme": "coo",
     "cover": 0.00020406597883948014
   },
   {
-    "morpheme": "coo",
+    "morpheme": "ping",
     "cover": 0.00020406597883948014
   },
   {
@@ -2636,11 +2636,11 @@
     "cover": 0.0002020225482978085
   },
   {
-    "morpheme": "ua",
+    "morpheme": "rm",
     "cover": 0.00020184937621800582
   },
   {
-    "morpheme": "rm",
+    "morpheme": "ua",
     "cover": 0.00020184937621800582
   },
   {
@@ -2832,11 +2832,11 @@
     "cover": 0.00019155140987240634
   },
   {
-    "morpheme": "trai",
+    "morpheme": "crea",
     "cover": 0.0001914128722085642
   },
   {
-    "morpheme": "crea",
+    "morpheme": "trai",
     "cover": 0.0001914128722085642
   },
   {
@@ -3092,11 +3092,11 @@
     "cover": 0.00017975261883518363
   },
   {
-    "morpheme": "rese",
+    "morpheme": "af",
     "cover": 0.00017968335000326257
   },
   {
-    "morpheme": "af",
+    "morpheme": "rese",
     "cover": 0.00017968335000326257
   },
   {
@@ -3384,11 +3384,11 @@
     "cover": 0.0001669378849297852
   },
   {
-    "morpheme": "bre",
+    "morpheme": "add",
     "cover": 0.0001667647128499825
   },
   {
-    "morpheme": "add",
+    "morpheme": "bre",
     "cover": 0.0001667647128499825
   },
   {
@@ -3624,11 +3624,11 @@
     "cover": 0.0001596415679674322
   },
   {
-    "morpheme": "repre",
+    "morpheme": "compo",
     "cover": 0.00015949148549826986
   },
   {
-    "morpheme": "compo",
+    "morpheme": "repre",
     "cover": 0.00015949148549826986
   },
   {
@@ -3636,11 +3636,11 @@
     "cover": 0.00015945685108230932
   },
   {
-    "morpheme": "clea",
+    "morpheme": "trea",
     "cover": 0.0001594106718610286
   },
   {
-    "morpheme": "trea",
+    "morpheme": "clea",
     "cover": 0.0001594106718610286
   },
   {
@@ -3680,11 +3680,11 @@
     "cover": 0.00015857944587797574
   },
   {
-    "morpheme": "suppl",
+    "morpheme": "activ",
     "cover": 0.00015851017704605468
   },
   {
-    "morpheme": "activ",
+    "morpheme": "suppl",
     "cover": 0.00015851017704605468
   },
   {
@@ -3704,11 +3704,11 @@
     "cover": 0.00015787521275344485
   },
   {
-    "morpheme": "paper",
+    "morpheme": "scree",
     "cover": 0.00015781748872684394
   },
   {
-    "morpheme": "scree",
+    "morpheme": "paper",
     "cover": 0.00015781748872684394
   },
   {
@@ -3764,11 +3764,11 @@
     "cover": 0.00015705553157571215
   },
   {
-    "morpheme": "oduc",
+    "morpheme": "trave",
     "cover": 0.00015700935235443144
   },
   {
-    "morpheme": "trave",
+    "morpheme": "oduc",
     "cover": 0.00015700935235443144
   },
   {
@@ -3776,11 +3776,11 @@
     "cover": 0.00015699780754911127
   },
   {
-    "morpheme": "esent",
+    "morpheme": "promo",
     "cover": 0.00015689390430122965
   },
   {
-    "morpheme": "promo",
+    "morpheme": "esent",
     "cover": 0.00015689390430122965
   },
   {
@@ -3876,11 +3876,11 @@
     "cover": 0.00015311875296153117
   },
   {
-    "morpheme": "ato",
+    "morpheme": "card",
     "cover": 0.00015280704321788636
   },
   {
-    "morpheme": "card",
+    "morpheme": "ato",
     "cover": 0.00015280704321788636
   },
   {
@@ -4012,11 +4012,11 @@
     "cover": 0.00014726553666420054
   },
   {
-    "morpheme": "lop",
+    "morpheme": "alt",
     "cover": 0.00014719626783227946
   },
   {
-    "morpheme": "alt",
+    "morpheme": "lop",
     "cover": 0.00014719626783227946
   },
   {
