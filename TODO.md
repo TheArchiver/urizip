@@ -1,5 +1,16 @@
 # TODO
 
+-- Add detection for numbers and encode them using 3 or 4 bits per number. 
+-- Add detection for GUIDs or any hex sequence. And encode as a number.
+-- We can save on the query parameters if we encode that block specially. 
+For example, we encode escapes as normal. We encode & variable = value as
+0|variable|0|value
+
+We have a separate morpheme block for every section of the URI.
+
+Right now I'm getting consistently below parity (50 - 88%) or original. This is great. considering we are base64 encoding.
+
+
 DONE We need something like bitfields. Like huffman coding. And common words.
 
 Morphemes
