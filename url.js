@@ -77,6 +77,7 @@
       }
     }
   }
+
   console.log( "TLD match", match );
 
   const code_parts = parts.map( part => shrink( part ) );
