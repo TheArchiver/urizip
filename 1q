@@ -1,6 +1,5 @@
 "use strict";
 {
-  const btoa = require('btoa');
   const fs = require('fs');
   const host_codes = JSON.parse( fs.readFileSync( 'host_codes.json', {encoding:'utf8'} ) );
   const path_codes = JSON.parse( fs.readFileSync( 'path_codes.json', {encoding:'utf8'} ) );
@@ -129,7 +128,6 @@
     const part = state.wordparts[partname];
     if ( !!part ) {
       state[partname+'code'] = shrink( part, part_codes[partname+'_codes'] );
-      state.code += state[partname+'code'];
     }
   }
 
@@ -140,16 +138,11 @@
     }
   }
 
-  function stringify( state ) {
-    state.string = tostring( state.code );
-  }
-
   function test() {
     parse(state);
     code_scheme(state);
     code_tld( state );
     code_parts( state );
-    stringify( state );
     console.log(state);
   }
 
