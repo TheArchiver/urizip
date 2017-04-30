@@ -2,10 +2,12 @@
 {
   const fs = require('fs');
   const morphemes = JSON.parse( fs.readFileSync( 'dict.json', { encoding: 'utf8' } ) );
+  const mdict = morphemes.reduce( (a,m) => (a[m]=m.cover, a), {} );
   morphemes.sort( (a,b)=>b.cover - a.cover);
   const parts = require('./uri_parts.js');
   const target = process.argv[2];
-  const boost = parts[target+ "_boost"];
+  const boosta = parts[target+ "_boost"];
+  const boost = new Set(boosta); 
   const outfile_name = target + "_dict.json";
 
   let minCover = morphemes[0].cover;
@@ -62,13 +64,16 @@
     statsByLength
   }
   
-  for ( const boost_word in boost ) {
-    const stats = statsByLen[boost_word.length];
-    console.log( boost_word, stats, result.maxCover );
-    morphemes.push( {
-      morpheme: boost_word,
-      cover: stats.max * 0.8
-    } );
+  for ( const boost_word of boost ) {
+    const stats = statsByLength[boost_word.length];
+    if ( ! ( boost_word in mdict ) ) {
+      const cover = ( stats.medianCover + stats.avgCover + stats.max ) /3.0 * 0.8;
+      mdict[boost_word] = cover;
+      morphemes.push( {
+        morpheme: boost_word,
+        cover
+      } );
+    }
   }
   morphemes.sort( (a,b)=>b.cover - a.cover);
   morphemes.length = 1024;

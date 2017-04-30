@@ -21,10 +21,15 @@
   const fragment = pchar + "/" + "?";
   const query = pchar + "/" + "?";
 
+  const host_boost = host.split('');
+  host_boost.push("--", "::" );
+  const path_boost = path.split('');
+  path_boost.push( "..", "/../", "/./", "%20", "%%" );
+  const query_boost = query.split('');
+  query_boost.push("&=", "%20", "%%");
+  const fragment_boost = fragment.split('');
+
   module.exports = {
-    host_boost: host.split( '' ).push( "--", "::" ),
-    path_boost: path.split( '' ).push( "..", "/../", "/./", "%20", "%%" ),
-    query_boost: query.split( '' ).push( "&=", "%20", "%%" ),
-    fragment_boost: fragment.split( '' ).push( '#' )
+    host_boost, path_boost, query_boost, fragment_boost
   }
 }
