@@ -23,8 +23,8 @@
 
   module.exports = {
     host_boost: host.split( '' ).push( "--", "::" ),
-    path_boost: path.split( '' ).push( ".." ),
-    query_boost: query.split( '' ).push( "&=", "%20" ),
+    path_boost: path.split( '' ).push( "..", "/../", "/./", "%20", "%%" ),
+    query_boost: query.split( '' ).push( "&=", "%20", "%%" ),
     fragment_boost: fragment.split( '' ).push( '#' )
   }
 }

@@ -1,7 +1,7 @@
 "use strict";
 {
   const fs = require('fs');
-  const tree = JSON.parse( fs.readFileSync('tree.json', {encoding:'utf8'}));
+  const tree = JSON.parse( fs.readFileSync( process.argv[2] || 'tree.json', {encoding:'utf8'}));
   const codes = {};
 
   const stack = [ tree ];

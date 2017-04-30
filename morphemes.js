@@ -56,11 +56,6 @@
     }
     morphemes.push( { morpheme, cover } ); 
   }
-  morphemes.push(
-    ...("/-_.#".split('').map( char => ({morpheme: char, cover: total_cover * 0.05 }) )),
-    ...("&=%?".split('').map( char => ({morpheme: char, cover: total_cover * 0.005 }) )),
-    ...("0123456789".split('').map( char => ({morpheme: char, cover: total_cover * 0.015 }) ))
-  );
   morphemes.sort( (a,b) => b.cover - a.cover );
   morphemes.length = 1024;
   morphemes.forEach( (m,i) => {

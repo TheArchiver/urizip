@@ -6,11 +6,28 @@ cd google-10000-english
 git pull
 cd ..
 node morphemes.js english-words/words.txt google-10000-english/google-10000-english-no-swears.txt > dict.json
+
+node make_uri_parts_dicts.js 
+
 node huffman.js > tree.json
 node encode.js > codes.json
+
+node huffman.js host_dict.json > host_tree.json
+node encode.js host_tree.json > host_codes.json
+
+node huffman.js path_dict.json > path_tree.json
+node encode.js path_tree.json > path_codes.json
+
+node huffman.js query_dict.json > query_tree.json
+node encode.js query_tree.json > query_codes.json
+
+node huffman.js fragment_dict.json > fragment_tree.json
+node encode.js fragment_tree.json > fragment_codes.json
+
 node parse_tld.js > tld_dict.json
 node tld_huffman.js > tld_tree.json
 node tld_encode.js > tld_codes.json
+
 git add .
 git commit -m OK
 git push

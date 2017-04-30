@@ -1,7 +1,7 @@
 "use strict";
 {
   const fs = require('fs');
-  const morphemes = JSON.parse( fs.readFileSync( 'dict.json', { encoding: 'utf8' } ) );
+  const morphemes = JSON.parse( fs.readFileSync( process.argv[2] || 'dict.json', { encoding: 'utf8' } ) );
 
   while( morphemes.length > 1 ) {
     const [ a, b ] = [ morphemes.pop(), morphemes.pop() ];
