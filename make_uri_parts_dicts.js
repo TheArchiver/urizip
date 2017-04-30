@@ -4,6 +4,9 @@
   const morphemes = JSON.parse( fs.readFileSync( process.argv[2] || 'dict.json', { encoding: 'utf8' } ) );
   morphemes.sort( (a,b)=>b.cover - a.cover);
   const parts = require('./uri_parts.js');
+  const target = process.argv[3];
+  const boost = parts[target+ "_boost"];
+  const outfile_name = target + "_dict.json";
 
   let minCover = morphemes[0].cover;
   let maxCover = morphemes[0].cover;
@@ -59,5 +62,5 @@
     statsByLength
   }
   
-  //console.log( JSON.stringify( result, null, 2 ) );
+  fs.writeFileSync( outfile_name, JSON.stringify( result, null, 2 ), {encoding:'utf8'});
 }
