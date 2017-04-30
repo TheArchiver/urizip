@@ -66,7 +66,7 @@
     const stats = statsByLen[boost_word.length];
     morphemes.push( {
       morpheme: boost_word,
-      cover: ( stats.avgCover + stats.maxCover + stats.medianCover )/3
+      cover: stats.maxCover * 0.8
     } );
   }
   morphemes.sort( (a,b)=>b.cover - a.cover);
