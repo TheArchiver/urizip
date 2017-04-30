@@ -15,7 +15,6 @@
   let totalCover = 0;
   let statsByLength = [];
 
-
   for( const m of morphemes ) {
     if ( m.cover < minCover ) {
       minCover = m.cover;
