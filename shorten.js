@@ -22,17 +22,30 @@
   function shrink( word, codes ) {
     let encoding = ''
     let code = '';
-    for( const char of word ) {
+    for( let i = 0; i < word.length; i++ ) {
+      const char = word[i];
       if ( code+char in codes ) {
         code = code+char;
       } else {
-        //console.log( code, codes[code] );
-        encoding += codes[code];
-        code = char;
+        let longest = code;
+        const MAX = Math.min( 6, word.length - i );
+        for( let j = 1; j < MAX;j++ ) {
+          const idx = j+i;
+          if ( idx >= word.length ) {
+            break;
+          }
+          if ( code+char+word.slice(i+1,idx+1) in codes ) {
+            longest = code+char+word.slice(i+1,idx+1);
+            i = idx+1;
+          }
+        }
+        console.log( longest, codes[code] );
+        encoding += codes[longest];
+        code = word[i] || '';
       }
     }
     if ( code.length ) {
-      //console.log( code, codes[code] );
+      console.log( code, codes[code] );
       encoding += codes[code];
     }
     return encoding;
@@ -99,11 +112,9 @@
     while( bits.length ) {
       bytes.push( bits.splice(0,8).join('') );
     }
-    console.log( bytes );
     bytes.forEach( (s,i) => {
       bytes[i] = parseInt(s,2);
     });
-    console.log( bytes );
     bytes.forEach( (b,i) => {
       bytes[i] = String.fromCharCode( b );
     });
