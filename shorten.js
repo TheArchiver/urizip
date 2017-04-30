@@ -38,6 +38,61 @@
     return encoding;
   }
 
+  function random_choice( s ) {
+    const random_index = Math.floor( Math.random() * s.length );
+    return s[random_index];
+  }
+
+  function gen_divider( s, dividers = [] ) {
+    const disallowed = "[]#";
+    // if we need to use this we choose a 2 character symbol as divider
+    // or enlarge to length 3 if none found
+    const backup_alphabet = "abcdefghijklmnopqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXY" + disallowed;
+    if ( ! dividers.length ) {
+      for( const div of disallowed ) {
+        if ( s.includes( div ) ) {
+          continue;
+        }
+        return div;
+      }
+    }
+    let found = false;
+    for ( const candidate of disallowed ) {
+      if ( dividers.includes( candidate ) || s.includes( candidate ) ) {
+        continue;
+      }
+      return candidate;
+    }
+    let count = 1000;
+    while( count-- ) {
+      const div = random_choice( backup_alphabet ) + random_choice( backup_alphabet );
+      if ( dividers.includes( div ) || s.includes( div ) ) {
+        continue;
+      }
+      return div;
+    }
+    count = 1000;
+    while( count-- ) {
+      const div = random_choice( backup_alphabet ) + random_choice( backup_alphabet ) + random_choice( backup_alphabet );
+      if ( dividers.includes( div ) || s.includes( div ) ) {
+        continue;
+      }
+      return div;
+    }
+    throw new TypeError( `Impossible to find a divider for string ${s} that is not present in string.` )
+  }
+
+  function gen_dividers( s, anextra, anotherextra ) {
+    const dividers = [ gen_divider( s ) ];  
+    if ( anextra ) {
+      dividers.push( gen_divider( s, dividers ) );
+    }
+    if ( anotherextra ) {
+      dividers.push( gen_divider( s, dividers ) ); 
+    }
+    return dividers;
+  }
+
   function tostring( bits ) {
     const bytes = [];
     bits = bits.split('');
@@ -140,6 +195,43 @@
     }
   }
 
+  function code_query( state ) {
+    const query = state.url.query;
+
+    if ( ! query ) {
+      return;
+    }
+
+    let numbers = false;
+    let multi = false;
+    const slots = query.split( '&' );
+    const pairs = slots.map( slot => slot.split('=') );
+    const map = pairs.reduce( (m,p) => {
+      const [ name, value ] = p;
+      let val = value;
+      if ( parseInt(val).toString() == val ) {
+        numbers = true;
+        val = parseInt(val);
+      }
+      if ( name in m ) {
+        if ( ! multi ) {
+          multi = true;
+        }
+        let current = m[name];
+        if ( !Array.isArray( current ) ) {
+          current = [ current ]; 
+        }
+        current.push( val );
+        m[name] = current;
+      } else {
+        m[name] = val;
+      }
+      return m;
+    }, {});
+    const dividers = gen_dividers( query, multi, numbers );
+    return [ dividers, map ];
+  }
+
   function stringify( state ) {
     state.string = tostring( state.code );
   }
@@ -153,5 +245,7 @@
     console.log(state);
   }
 
-  test()
+  console.log(code_query( { url : { query : process.argv[2] } } ) );
+  //console.log( gen_dividers( process.argv[2], true, true ) );
+  //test()
 }

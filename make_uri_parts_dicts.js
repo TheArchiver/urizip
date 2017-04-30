@@ -74,6 +74,14 @@
       } );
     }
   }
+
+  if ( target == "query" ) {
+    morphemes.push( {
+      morpheme: "divider",
+      cover: maxCover * 1.5
+    });
+  }
+
   morphemes.sort( (a,b)=>b.cover - a.cover);
   morphemes.length = 1024;
   fs.writeFileSync( outfile_name, JSON.stringify( morphemes, null, 2 ), {encoding:'utf8'});

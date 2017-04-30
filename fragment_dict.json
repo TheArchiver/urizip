@@ -52,10 +52,6 @@
     "cover": 0.004279642636625658
   },
   {
-    "morpheme": "@",
-    "cover": 0.004279642636625658
-  },
-  {
     "morpheme": ":",
     "cover": 0.004279642636625658
   },
@@ -1188,11 +1184,11 @@
     "cover": 0.0004785783597426912
   },
   {
-    "morpheme": "and",
+    "morpheme": "the",
     "cover": 0.0004748378428189533
   },
   {
-    "morpheme": "the",
+    "morpheme": "and",
     "cover": 0.0004748378428189533
   },
   {
@@ -2576,11 +2572,11 @@
     "cover": 0.00022779055377244753
   },
   {
-    "morpheme": "mai",
+    "morpheme": "ban",
     "cover": 0.00022744420961284218
   },
   {
-    "morpheme": "ban",
+    "morpheme": "mai",
     "cover": 0.00022744420961284218
   },
   {
@@ -2632,6 +2628,10 @@
     "cover": 0.00022392304399018766
   },
   {
+    "morpheme": "time",
+    "cover": 0.0002237845063263455
+  },
+  {
     "morpheme": "ners",
     "cover": 0.0002237845063263455
   },
@@ -2640,19 +2640,15 @@
     "cover": 0.0002237845063263455
   },
   {
-    "morpheme": "time",
-    "cover": 0.0002237845063263455
-  },
-  {
     "morpheme": "ever",
     "cover": 0.00022346125177738051
   },
   {
-    "morpheme": "gre",
+    "morpheme": "mark",
     "cover": 0.00022346125177738051
   },
   {
-    "morpheme": "mark",
+    "morpheme": "gre",
     "cover": 0.00022346125177738051
   },
   {
@@ -2924,11 +2920,11 @@
     "cover": 0.00020451622624696712
   },
   {
-    "morpheme": "coo",
+    "morpheme": "ping",
     "cover": 0.00020406597883948014
   },
   {
-    "morpheme": "ping",
+    "morpheme": "coo",
     "cover": 0.00020406597883948014
   },
   {
@@ -3052,11 +3048,11 @@
     "cover": 0.00019831666579003113
   },
   {
-    "morpheme": "dem",
+    "morpheme": "tors",
     "cover": 0.0001978317839665836
   },
   {
-    "morpheme": "tors",
+    "morpheme": "dem",
     "cover": 0.0001978317839665836
   },
   {
@@ -3116,11 +3112,11 @@
     "cover": 0.00019551127809722767
   },
   {
-    "morpheme": "ob",
+    "morpheme": "respo",
     "cover": 0.000195338106017425
   },
   {
-    "morpheme": "respo",
+    "morpheme": "ob",
     "cover": 0.000195338106017425
   },
   {
@@ -3160,11 +3156,11 @@
     "cover": 0.00019155140987240634
   },
   {
-    "morpheme": "crea",
+    "morpheme": "trai",
     "cover": 0.0001914128722085642
   },
   {
-    "morpheme": "trai",
+    "morpheme": "crea",
     "cover": 0.0001914128722085642
   },
   {
@@ -3580,11 +3576,11 @@
     "cover": 0.0001736800512367696
   },
   {
-    "morpheme": "exce",
+    "morpheme": "main",
     "cover": 0.00017349533435164673
   },
   {
-    "morpheme": "main",
+    "morpheme": "exce",
     "cover": 0.00017349533435164673
   },
   {
@@ -3600,11 +3596,11 @@
     "cover": 0.00017337988629844494
   },
   {
-    "morpheme": "ider",
+    "morpheme": "base",
     "cover": 0.0001733567966878046
   },
   {
-    "morpheme": "base",
+    "morpheme": "ider",
     "cover": 0.0001733567966878046
   },
   {
@@ -3952,11 +3948,11 @@
     "cover": 0.0001596415679674322
   },
   {
-    "morpheme": "compo",
+    "morpheme": "repre",
     "cover": 0.00015949148549826986
   },
   {
-    "morpheme": "repre",
+    "morpheme": "compo",
     "cover": 0.00015949148549826986
   },
   {
@@ -4044,11 +4040,11 @@
     "cover": 0.0001577943991162036
   },
   {
-    "morpheme": "ans",
+    "morpheme": "ected",
     "cover": 0.00015775976470024306
   },
   {
-    "morpheme": "ected",
+    "morpheme": "ans",
     "cover": 0.00015775976470024306
   },
   {
@@ -4090,6 +4086,10 @@
   {
     "morpheme": "dire",
     "cover": 0.00015705553157571215
+  },
+  {
+    "morpheme": "oduc",
+    "cover": 0.00015700935235443144
   },
   {
     "morpheme": "trave",
