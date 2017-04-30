@@ -1,5 +1,6 @@
 # TODO
 
+-- Add a way to parse and save query parameters....using special format.
 -- Add detection for numbers and encode them using 3 or 4 bits per number. 
 -- Add detection for GUIDs or any hex sequence. And encode as a number.
 -- We can save on the query parameters if we encode that block specially. 
