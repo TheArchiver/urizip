@@ -62,5 +62,14 @@
     statsByLength
   }
   
-  fs.writeFileSync( outfile_name, JSON.stringify( result, null, 2 ), {encoding:'utf8'});
+  for ( const boost_word in boost ) {
+    const stats = statsByLen[boost_word.length];
+    morphemes.push( {
+      morpheme: boost_word,
+      cover: ( stats.avgCover + stats.maxCover + stats.medianCover )/3
+    } );
+  }
+  morphemes.sort( (a,b)=>b.cover - a.cover);
+  morphemes.length = 1024;
+  fs.writeFileSync( outfile_name, JSON.stringify( morphemes, null, 2 ), {encoding:'utf8'});
 }
