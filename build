@@ -7,7 +7,11 @@ git pull
 cd ..
 node morphemes.js english-words/words.txt google-10000-english/google-10000-english-no-swears.txt > dict.json
 
-node make_uri_parts_dicts.js 
+node make_uri_parts_dicts.js host
+node make_uri_parts_dicts.js path
+node make_uri_parts_dicts.js query
+node make_uri_parts_dicts.js fragment
+
 
 node huffman.js > tree.json
 node encode.js > codes.json

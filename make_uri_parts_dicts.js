@@ -59,5 +59,5 @@
     statsByLength
   }
   
-  console.log( JSON.stringify( result, null, 2 ) );
+  //console.log( JSON.stringify( result, null, 2 ) );
 }
