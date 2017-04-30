@@ -92,6 +92,43 @@
     );
   }
 
+  if ( target == "path" ) {
+    morphemes.push( 
+      {
+        morpheme: ".htm",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".html",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".aspx",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".cgi",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".php",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".jpeg",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".jpg",
+        cover: maxCover * 2
+      },
+      {
+        morpheme: ".png",
+        cover: maxCover * 2
+      }
+    );
+  }
+
   morphemes.sort( (a,b)=>b.cover - a.cover);
   morphemes.length = 1024;
   fs.writeFileSync( outfile_name, JSON.stringify( morphemes, null, 2 ), {encoding:'utf8'});

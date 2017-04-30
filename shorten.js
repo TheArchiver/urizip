@@ -82,13 +82,13 @@
     throw new TypeError( `Impossible to find a divider for string ${s} that is not present in string.` )
   }
 
-  function gen_dividers( s, anextra, anotherextra ) {
+  function gen_dividers( s, array, numbers ) {
     const dividers = [ gen_divider( s ) ];  
-    if ( anextra ) {
-      dividers.push( gen_divider( s, dividers ) );
+    if ( array ) {
+      dividers[1] = gen_divider( s, dividers );
     }
-    if ( anotherextra ) {
-      dividers.push( gen_divider( s, dividers ) ); 
+    if ( numbers ) {
+      dividers[2] = gen_divider( s, dividers );
     }
     return dividers;
   }
@@ -189,10 +189,14 @@
   }
 
   function code_parts( state ) {
-    const partnames = ["host", "path", "query", "fragment"];
+    const partnames = ["host", "path", "fragment"];
     for ( const partname of partnames ) {
       code_part( state, partname );
     }
+  }
+
+  function codeNum( v ) {
+    return v.toString(36);
   }
 
   function code_query( state ) {
@@ -244,16 +248,20 @@
       compact += name + dividers[0]; 
       const vals = map[name];
       if ( Array.isArray( vals ) ) {
-        compact += vals.map( val => Number.isInteger( val ) ? dividers[2] + val : val ).join( dividers[1] );
+        compact += vals.map( val => Number.isInteger( val ) ? dividers[2] + codeNum(val) : val ).join( dividers[1] );
       } else {
         if ( Number.isInteger( vals ) ) {
-          compact += dividers[2];
+          compact += dividers[2] + codeNum(vals);
+        } else {
+          compact += vals;
         }
-        compact += vals;
       }
       compact += dividers[0];
     }
     const coded = shrink( compact, these_codes );
+    state.query = {
+      compact, dividers, coded
+    };
     return [ dividers, map, compact, coded ];
   }
 
@@ -266,11 +274,17 @@
     code_scheme(state);
     code_tld( state );
     code_parts( state );
-    stringify( state );
+    code_query( state );
+    if ( true || state.query.coded.length / 8 < state.url.query ) {
+      state.code += state.query.coded;
+      stringify( state );
+    } else {
+      stringify( state );
+      state.string += btoa(state.url.query);
+    }
     console.log(state);
   }
 
-  console.log(code_query( { url : { query : process.argv[2] } } ) );
-  //console.log( gen_dividers( process.argv[2], true, true ) );
-  //test()
+
+  test()
 }
