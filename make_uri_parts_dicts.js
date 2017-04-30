@@ -64,9 +64,10 @@
   
   for ( const boost_word in boost ) {
     const stats = statsByLen[boost_word.length];
+    console.log( boost_word, stats, result.maxCover );
     morphemes.push( {
       morpheme: boost_word,
-      cover: stats.maxCover * 0.8
+      cover: stats.max * 0.8
     } );
   }
   morphemes.sort( (a,b)=>b.cover - a.cover);
