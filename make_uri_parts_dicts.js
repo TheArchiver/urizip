@@ -79,15 +79,15 @@
     morphemes.push( 
       {
         morpheme: "slot_divider",
-        cover: maxCover * 1.6
+        cover: maxCover * 8
       },
       {
         morpheme: "array_divider",
-        cover: maxCover * 1.0
+        cover: maxCover * 4
       },
       {
         morpheme: "number_divider",
-        cover: maxCover * 1.0
+        cover: maxCover * 4
       }
     );
   }

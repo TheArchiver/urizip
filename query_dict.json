@@ -1,18 +1,18 @@
 [
   {
     "morpheme": "slot_divider",
-    "cover": 0.015347608777580136
-  },
-  {
-    "morpheme": "s",
-    "cover": 0.009592255485987584
-  },
-  {
-    "morpheme": "array_divider",
-    "cover": 0.009592255485987584
+    "cover": 0.07673804388790068
   },
   {
     "morpheme": "number_divider",
+    "cover": 0.03836902194395034
+  },
+  {
+    "morpheme": "array_divider",
+    "cover": 0.03836902194395034
+  },
+  {
+    "morpheme": "s",
     "cover": 0.009592255485987584
   },
   {
