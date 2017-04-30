@@ -206,6 +206,7 @@
     let multi = false;
     const slots = query.split( '&' );
     const pairs = slots.map( slot => slot.split('=') );
+    const order = [];
     const map = pairs.reduce( (m,p) => {
       const [ name, value ] = p;
       let val = value;
@@ -225,11 +226,35 @@
         m[name] = current;
       } else {
         m[name] = val;
+        order.push( name );
       }
       return m;
     }, {});
     const dividers = gen_dividers( query, multi, numbers );
-    return [ dividers, map ];
+    const these_codes = Object.assign({}, query_codes);
+    these_codes[dividers[0]] = these_codes['slot_divider'];
+    these_codes[dividers[1]] = these_codes['array_divider'];
+    these_codes[dividers[2]] = these_codes['number_divider'];
+    console.log( these_codes, dividers );
+    delete these_codes['slot_divider'];
+    delete these_codes['array_divider'];
+    delete these_codes['number_divider'];
+    let compact = '';
+    for( const name of order ) {
+      compact += name + dividers[0]; 
+      const vals = map[name];
+      if ( Array.isArray( vals ) ) {
+        compact += vals.map( val => Number.isInteger( val ) ? dividers[2] + val : val ).join( dividers[1] );
+      } else {
+        if ( Number.isInteger( vals ) ) {
+          compact += dividers[2];
+        }
+        compact += vals;
+      }
+      compact += dividers[0];
+    }
+    const coded = shrink( compact, these_codes );
+    return [ dividers, map, compact, coded ];
   }
 
   function stringify( state ) {

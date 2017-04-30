@@ -76,10 +76,20 @@
   }
 
   if ( target == "query" ) {
-    morphemes.push( {
-      morpheme: "divider",
-      cover: maxCover * 1.5
-    });
+    morphemes.push( 
+      {
+        morpheme: "slot_divider",
+        cover: maxCover * 1.6
+      },
+      {
+        morpheme: "array_divider",
+        cover: maxCover * 1.0
+      },
+      {
+        morpheme: "number_divider",
+        cover: maxCover * 1.0
+      }
+    );
   }
 
   morphemes.sort( (a,b)=>b.cover - a.cover);

@@ -1,10 +1,18 @@
 [
   {
-    "morpheme": "divider",
-    "cover": 0.014388383228981377
+    "morpheme": "slot_divider",
+    "cover": 0.015347608777580136
   },
   {
     "morpheme": "s",
+    "cover": 0.009592255485987584
+  },
+  {
+    "morpheme": "array_divider",
+    "cover": 0.009592255485987584
+  },
+  {
+    "morpheme": "number_divider",
     "cover": 0.009592255485987584
   },
   {
@@ -50,14 +58,6 @@
   {
     "morpheme": "d",
     "cover": 0.004463752797825845
-  },
-  {
-    "morpheme": "d",
-    "cover": 0.004279642636625658
-  },
-  {
-    "morpheme": "e",
-    "cover": 0.004279642636625658
   },
   {
     "morpheme": "f",
@@ -376,6 +376,14 @@
     "cover": 0.004279642636625658
   },
   {
+    "morpheme": "d",
+    "cover": 0.004279642636625658
+  },
+  {
+    "morpheme": "e",
+    "cover": 0.004279642636625658
+  },
+  {
     "morpheme": "l",
     "cover": 0.004170064495285817
   },
@@ -536,7 +544,7 @@
     "cover": 0.0014814525082959815
   },
   {
-    "morpheme": "%20",
+    "morpheme": "%25",
     "cover": 0.0014696257572655554
   },
   {
@@ -552,7 +560,7 @@
     "cover": 0.0014696257572655554
   },
   {
-    "morpheme": "%25",
+    "morpheme": "%20",
     "cover": 0.0014696257572655554
   },
   {
@@ -1596,11 +1604,11 @@
     "cover": 0.00034320397255827484
   },
   {
-    "morpheme": "sing",
+    "morpheme": "ors",
     "cover": 0.00034274218034546766
   },
   {
-    "morpheme": "ors",
+    "morpheme": "sing",
     "cover": 0.00034274218034546766
   },
   {
@@ -2008,11 +2016,11 @@
     "cover": 0.00027605938481611506
   },
   {
-    "morpheme": "port",
+    "morpheme": "ori",
     "cover": 0.00027555141338202714
   },
   {
-    "morpheme": "ori",
+    "morpheme": "port",
     "cover": 0.00027555141338202714
   },
   {
@@ -2292,11 +2300,11 @@
     "cover": 0.00024933316049990115
   },
   {
-    "morpheme": "del",
+    "morpheme": "sen",
     "cover": 0.00024922925725201955
   },
   {
-    "morpheme": "sen",
+    "morpheme": "del",
     "cover": 0.00024922925725201955
   },
   {
@@ -2596,11 +2604,11 @@
     "cover": 0.00022779055377244753
   },
   {
-    "morpheme": "mai",
+    "morpheme": "ban",
     "cover": 0.00022744420961284218
   },
   {
-    "morpheme": "ban",
+    "morpheme": "mai",
     "cover": 0.00022744420961284218
   },
   {
@@ -3072,11 +3080,11 @@
     "cover": 0.00019831666579003113
   },
   {
-    "morpheme": "tors",
+    "morpheme": "dem",
     "cover": 0.0001978317839665836
   },
   {
-    "morpheme": "dem",
+    "morpheme": "tors",
     "cover": 0.0001978317839665836
   },
   {
@@ -3136,11 +3144,11 @@
     "cover": 0.00019551127809722767
   },
   {
-    "morpheme": "ob",
+    "morpheme": "respo",
     "cover": 0.000195338106017425
   },
   {
-    "morpheme": "respo",
+    "morpheme": "ob",
     "cover": 0.000195338106017425
   },
   {
@@ -3340,11 +3348,11 @@
     "cover": 0.00018425509291005335
   },
   {
-    "morpheme": "chr",
+    "morpheme": "anc",
     "cover": 0.00018411655524621122
   },
   {
-    "morpheme": "anc",
+    "morpheme": "chr",
     "cover": 0.00018411655524621122
   },
   {
@@ -3580,11 +3588,11 @@
     "cover": 0.00017410720903361621
   },
   {
-    "morpheme": "sche",
+    "morpheme": "rial",
     "cover": 0.00017409566422829604
   },
   {
-    "morpheme": "rial",
+    "morpheme": "sche",
     "cover": 0.00017409566422829604
   },
   {
@@ -3620,11 +3628,11 @@
     "cover": 0.00017337988629844494
   },
   {
-    "morpheme": "base",
+    "morpheme": "ider",
     "cover": 0.0001733567966878046
   },
   {
-    "morpheme": "ider",
+    "morpheme": "base",
     "cover": 0.0001733567966878046
   },
   {
@@ -3820,11 +3828,11 @@
     "cover": 0.00016402859398910013
   },
   {
-    "morpheme": "emp",
+    "morpheme": "gh",
     "cover": 0.000163890056325258
   },
   {
-    "morpheme": "gh",
+    "morpheme": "emp",
     "cover": 0.000163890056325258
   },
   {
@@ -4028,11 +4036,11 @@
     "cover": 0.00015857944587797574
   },
   {
-    "morpheme": "suppl",
+    "morpheme": "activ",
     "cover": 0.00015851017704605468
   },
   {
-    "morpheme": "activ",
+    "morpheme": "suppl",
     "cover": 0.00015851017704605468
   },
   {
@@ -4080,19 +4088,11 @@
     "cover": 0.00015758659262044038
   },
   {
-    "morpheme": "ld",
-    "cover": 0.00015756350300980001
-  },
-  {
     "morpheme": "eren",
     "cover": 0.00015756350300980001
   },
   {
-    "morpheme": "exten",
-    "cover": 0.00015752886859383947
-  },
-  {
-    "morpheme": "ram",
-    "cover": 0.00015741342054063768
+    "morpheme": "ld",
+    "cover": 0.00015756350300980001
   }
 ]
