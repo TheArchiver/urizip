@@ -1,10 +1,10 @@
 "use strict";
 {
   const fs = require('fs');
-  const morphemes = JSON.parse( fs.readFileSync( process.argv[2] || 'dict.json', { encoding: 'utf8' } ) );
+  const morphemes = JSON.parse( fs.readFileSync( 'dict.json', { encoding: 'utf8' } ) );
   morphemes.sort( (a,b)=>b.cover - a.cover);
   const parts = require('./uri_parts.js');
-  const target = process.argv[3];
+  const target = process.argv[2];
   const boost = parts[target+ "_boost"];
   const outfile_name = target + "_dict.json";
 
