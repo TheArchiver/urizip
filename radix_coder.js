@@ -7,12 +7,20 @@
 
   // We detect a radix, turn it into an integer to save space.
 
-  function encode_hex_lower( s ) {
+  function encode_digis( s ) {
+    return parseInt( s );
+  }
 
+  function encode_hex_lower( s ) {
+    return parseInt( s, 16 );
   }
 
   function encode_hex_upper( s ) {
+    return parseInt( s, 16 );
+  }
 
+  function encode_base36( s ) {
+    return parseInt( s, 36 );
   }
 
   function encode_base62( s ) {
