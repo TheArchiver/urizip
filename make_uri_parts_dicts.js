@@ -131,7 +131,7 @@
 
   morphemes.push( {
     morpheme: "part_divider",
-    cover: maxCover
+    cover: maxCover * 16
   });
 
   morphemes.sort( (a,b)=>b.cover - a.cover);

@@ -1,5 +1,9 @@
 [
   {
+    "morpheme": "part_divider",
+    "cover": 0.15347608777580135
+  },
+  {
     "morpheme": ".png",
     "cover": 0.01918451097197517
   },
@@ -33,10 +37,6 @@
   },
   {
     "morpheme": "s",
-    "cover": 0.009592255485987584
-  },
-  {
-    "morpheme": "part_divider",
     "cover": 0.009592255485987584
   },
   {

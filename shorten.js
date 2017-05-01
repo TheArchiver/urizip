@@ -197,7 +197,7 @@
       const codes = part_codes[partname+'_codes'];
       state[partname+'code'] = shrink( part, codes );
       state.code += state[partname+'code'];
-      state.code += codes.general_divider;
+      state.code += codes.part_divider;
     }
   }
 
@@ -206,7 +206,7 @@
     for ( const partname of partnames ) {
       if ( partname == 'query' ) {
         code_query( state );
-        state.code += state.query.coded + query_codes.general_divider;
+        state.code += state.query.coded + query_codes.part_divider;
       } else {
         code_part( state, partname );
       }
@@ -254,13 +254,14 @@
     }, {});
     const dividers = gen_dividers( query, multi, numbers );
     const these_codes = Object.assign({}, query_codes);
-    these_codes[dividers[0]] = these_codes['slot_divider'];
-    these_codes[dividers[1]] = these_codes['array_divider'];
-    these_codes[dividers[2]] = these_codes['number_divider'];
-    console.log( these_codes, dividers );
+    const names = [ 'slot', 'array', 'number' ];
+    dividers.forEach( (d,i) => {
+      these_codes[d] = these_codes[names[i]+'_divider'];
+    });
     delete these_codes['slot_divider'];
     delete these_codes['array_divider'];
     delete these_codes['number_divider'];
+    //console.log( these_codes, dividers );
     let compact = '';
     for( const name of order ) {
       compact += name + dividers[0]; 
