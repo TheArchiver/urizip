@@ -45,13 +45,13 @@
             i = idx+1;
           }
         }
-        console.log( longest, codes[code] );
+        //console.log( longest, codes[code] );
         encoding += codes[longest];
         code = word[i] || '';
       }
     }
     if ( code.length ) {
-      console.log( code, codes[code] );
+      //console.log( code, codes[code] );
       encoding += codes[code];
     }
     return encoding;
@@ -118,12 +118,12 @@
   function tostring( state ) {
     let bits = state.code.split('');
     const bytes = [];
-    let last_octet_length = (( 3 + bits.length ) % 8).toString(2).split('');
-    console.log( "LAL", last_octet_length );
+    const  last_octet_length = (( 3 + bits.length ) % 8).toString(2).split('');
+    //console.log( "LAL", last_octet_length );
     while( last_octet_length.length < 3 ) {
       last_octet_length.unshift('0');
     }
-    console.log( "LAL", last_octet_length );
+    //console.log( "LAL", last_octet_length );
     const temp = state.code.split('');
     temp.splice(6, 0, ...last_octet_length );
     state.code = temp.join('');
@@ -131,9 +131,6 @@
     while( bits.length ) {
       const octet = bits.splice(0,8).join('');
       bytes.push( octet );
-      if ( octet.length !== 8 ) {
-        last_octet_length = ( octet.length + 3 ) % 8;
-      }
     }
     bytes.forEach( (s,i) => {
       bytes[i] = parseInt(s,2);
@@ -152,13 +149,13 @@
       throw new TypeError('Only accept authority URLs with <scheme>://');
     }
     const [ scheme, schemeless ] = url.split( /:\/\/(.+)/ );
-    console.log(scheme,schemeless);
+    //console.log(scheme,schemeless);
     const [ hostport, hostless ] = schemeless.split(/\/(.+)/ );
-    console.log(hostport,hostless)
+    //console.log(hostport,hostless)
     const [ host, port ] = hostport.split(/:(.+)/);
-    console.log(host,port)
+    //console.log(host,port)
     const [ path, pathless ] = hostless.split(/\?(.+)/);
-    console.log(path,pathless)
+    //console.log(path,pathless)
     let query, fragment;
     if ( !!pathless ) {
       ([ query, fragment ] = pathless.split(/#(.+)/));
@@ -286,7 +283,7 @@
     delete these_codes['array_divider'];
     delete these_codes['number_divider'];
     delete these_codes['part_divider'];
-    console.log( these_codes, dividers );
+    //console.log( these_codes, dividers );
     let compact = '';
     for( const name of order ) {
       compact += name + dividers[0]; 
@@ -304,11 +301,11 @@
         compact += dividers[0];
       } else {
         compact += dividers[3];
-        console.log( dividers, compact );
+        //console.log( dividers, compact );
       }
     }
     const coded = shrink( compact, these_codes );
-    console.log(coded);
+    //console.log(coded);
     state.query = {
       compact, dividers, coded
     };
@@ -324,10 +321,11 @@
       const prefix = 8 - bits.length;
       return Array(prefix+1).join('0') + bits;
     } else {
-      console.log( "last", bits );
-      return bits;
       const prefix = last_length - bits.length;
-      return Array(prefix+1).join('0') + bits;
+      //console.log( "LAST", prefix, last_length, bits.length );
+      const last_bits = Array(prefix+1).join('0') + bits;
+      //console.log( "last bits", last_bits, prefix, last_length, last_bits.length, bits );
+      return last_bits;
     }
   }
 
@@ -335,18 +333,21 @@
     const bytes = atob( s ).split('').map( b => b.codePointAt( 0 ) );
     //console.log( ">", bytes );
     const header = bytes.slice(0,2).map( b => toOctet(b) ).join('');
-    const last_octet_length = parseInt(header.slice(6,9));
-    console.log( "LO", last_octet_length );
+    let last_octet_length = parseInt(header.slice(6,9),2);
+    if ( last_octet_length == 0 ) {
+      last_octet_length = 8;
+    }
+    //console.log( "LO", last_octet_length );
     const bits = bytes.map( (b,i) => toOctet( b, i == bytes.length - 1, last_octet_length ) );
     const bs = bits.join('');
-    console.log('bs', bs);
+    //console.log('bs', bs);
     return bs;
   }
 
   function decode( bs ) {
     let decoded = '';
     bs = bs.split(''); 
-    console.log( bs.slice(0,16) );
+    //console.log( bs.slice(0,16) );
     const format_version = bs.splice(0, 2);
     console.log( "Version", format_version );
     const presence = parseInt(bs.splice(0, 4).join(''));
@@ -356,27 +357,28 @@
       presence & 2,
       presence & 1
     ];
-    console.log( presence );
+    //console.log( presence );
     const last_octet_length = parseInt(bs.splice(0, 3).join(''), 2);
-    console.log( last_octet_length );
+    //console.log( last_octet_length );
+    
     const scheme = bs.splice(0, 1) == '1' ? 'https://' : 'http://';
-    console.log( scheme );
+    //console.log( scheme );
     decoded += scheme;
     const tld_bit0 = bs.splice(0, 1 )[0];
     let tld_groupname;
     if ( tld_bit0 == '0' ) {
       tld_groupname = 'original'; 
     }
-    console.log( 'g', tld_groupname );
+    //console.log( 'g', tld_groupname );
     let tld_decoder = tld_tree[tld_groupname+"_root"];  
-    console.log('d', tld_decoder);
+    //console.log('d', tld_decoder);
     while( !tld_decoder.tld ) {
       const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';
       tld_decoder = tld_decoder[next_bit];
-      console.log(tld_decoder);
+      //console.log(tld_decoder);
     }
     const tld = tld_decoder.tld;
-    console.log( tld );
+    //console.log( tld );
     let host_decoder = host_tree;
     let host = '';
     buildhost: while( true ) {
@@ -393,13 +395,13 @@
         break buildhost;
       } else {
         host += code;
-        console.log( code, host );
+        //console.log( code, host );
         host_decoder = host_tree;
       }
     }
-    console.log( host );
+    //console.log( host );
     decoded += host + tld;
-    console.log( decoded );
+    //console.log( decoded );
     if ( has_path ) {
       let path_decoder = path_tree;
       let path = '/';
@@ -417,13 +419,13 @@
           break buildpath;
         } else {
           path += code;
-          console.log( code, path );
+          //console.log( code, path );
           path_decoder = path_tree;
         }
       }
-      console.log( path );
+      //console.log( path );
       decoded += path;
-      console.log( decoded );
+      //console.log( decoded );
     }
     if ( has_query ) {
       let query_decoder = query_tree;
@@ -451,13 +453,13 @@
           break buildquery;
         } else {
           query += code;
-          console.log( code, query );
+          //console.log( code, query );
           query_decoder = query_tree;
         }
       }
-      console.log( query );
+      //console.log( query );
       decoded += query;
-      console.log( decoded );
+      //console.log( decoded );
     }
     if ( has_fragment ) {
       let fragment_decoder = fragment_tree;
@@ -485,13 +487,13 @@
           break buildfragment;
         } else {
           fragment += code;
-          console.log( code, fragment );
+          //console.log( code, fragment );
           fragment_decoder = fragment_tree;
         }
       }
-      console.log( fragment );
+      //console.log( fragment );
       decoded += fragment;
-      console.log( decoded );
+      //console.log( decoded );
     }
   }
   function test() {

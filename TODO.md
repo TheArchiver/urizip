@@ -1,6 +1,10 @@
 # TODO
 
--- Add a way to parse and save query parameters....using special format.
+-- Clean up code. Modularise functions. Remove repeat code. Refactor.
+-- Add the ability to detect "limited alphabet non-natural language" sections such as
+"NKBTS10423WT" and "aef1-d04c-a41d" and so on...We detect the alphabet, and the section length.
+Then we chunk it into sizes which can fit inside one JS integer. We turn it into integers. Then 
+turn them into bytes. We have our encoding.
 -- Add detection for numbers and encode them using 3 or 4 bits per number. 
 -- Add detection for GUIDs or any hex sequence. And encode as a number.
 -- We can save on the query parameters if we encode that block specially. 
