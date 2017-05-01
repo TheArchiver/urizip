@@ -4,6 +4,9 @@ const btoa = require('btoa');
 const atob = require('atob');
 const fs = require('fs');
 const tld_tree = JSON.parse( fs.readFileSync( 'tld_tree.json', {encoding:'utf8'} ) );
+const host_tree = JSON.parse( fs.readFileSync( 'host_tree.json', {encoding:'utf8'} ) );
+const path_tree = JSON.parse( fs.readFileSync( 'path_tree.json', {encoding:'utf8'} ) );
+const query_tree = JSON.parse( fs.readFileSync( 'query_tree.json', {encoding:'utf8'} ) );
 const host_codes = JSON.parse( fs.readFileSync( 'host_codes.json', {encoding:'utf8'} ) );
 const path_codes = JSON.parse( fs.readFileSync( 'path_codes.json', {encoding:'utf8'} ) );
 const query_codes = JSON.parse( fs.readFileSync( 'query_codes.json', {encoding:'utf8'} ) );
@@ -108,12 +111,18 @@ function gen_dividers( s, array, numbers ) {
   return dividers;
 }
 
-function tostring( bits ) {
+function tostring( state ) {
+  const bits = state.code;
   const bytes = [];
   bits = bits.split('');
+  let last_octet_length = ( 3 + bits.length ) % 8;
+  state.code.splice(6, 0, ...last_octet_length.toString(2).split('') );
   while( bits.length ) {
-    const octet = bits.splice(0,8);
-    bytes.push( octet.join('') );
+    const octet = bits.splice(0,8).join('');
+    bytes.push( octet );
+    if ( octet.length !== 8 ) {
+      last_octet_length = ( octet.length + 3 ) % 8;
+    }
   }
   bytes.forEach( (s,i) => {
     bytes[i] = parseInt(s,2);
@@ -288,43 +297,133 @@ function code_query( state ) {
 }
 
 function stringify( state ) {
-  state.string = tostring( state.code );
+  state.string = tostring( state );
 }
 
-function toOctet( byte ) {
+function toOctet( byte, isLast, last_length ) {
   const bits = byte.toString(2);
-  const prefix = 8 - bits.length;
-  return Array(prefix+1).join('0') + bits;
+  if ( !isLast ) {
+    const prefix = 8 - bits.length;
+    return Array(prefix+1).join('0') + bits;
+  } else {
+    const prefix = last_length - bits.length;
+    return Array(prefix+1).join('0') + bits;
+  }
 }
 
 function lengthen( s ) {
   const bytes = atob( s ).split('').map( b => b.codePointAt( 0 ) );
   //console.log( ">", bytes );
-  const bits = bytes.map( (b,i) => toOctet( b ) );
+  const header = bytes.slice(0,2).map( b => toOctet(b) ).join('');
+  const last_octet_length = parseInt(header.slice(6,9));
+  const bits = bytes.map( (b,i) => toOctet( b, i == bytes.length - 1, last_octet_length ) );
   return bits.join('');
 }
 
 function decode( bs ) {
+  let decoded = '';
   bs = bs.split(''); 
   const format_version = bs.splice(0, 2);
   console.log( "Version", format_version );
   const presence = bs.splice(0, 4);
   console.log( presence );
+  const last_octet_length = parseInt(bs.splice(0, 3).join(''));
   const scheme = bs.splice(0, 1) == '1' ? 'https://' : 'http://';
   console.log( scheme );
+  decoded += scheme;
   const tld_bit0 = bs.splice(0, 1 )[0];
   let tld_groupname;
   if ( tld_bit0 == '0' ) {
     tld_groupname = 'original'; 
   }
-  console.log( tld_groupname );
+  console.log( 'g', tld_groupname );
   let tld_decoder = tld_tree[tld_groupname+"_root"];  
-  while( !tld_decoder.morpheme ) {
+  console.log('d', tld_decoder);
+  while( !tld_decoder.tld ) {
     const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';
     tld_decoder = tld_decoder[next_bit];
+    console.log(tld_decoder);
   }
-  const tld = tld_decoder.morpheme;
+  const tld = tld_decoder.tld;
   console.log( tld );
+  let host_decoder = host_tree;
+  let host = '';
+  buildhost: while( true ) {
+    let code = '';
+    buildcode: while( !host_decoder.morpheme ) {
+      const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
+      host_decoder = host_decoder[next_bit];
+    }
+    code = host_decoder.morpheme;
+    // FIXME: need another termination condition for this buildhost
+      // otherwise it's vulernable to infinite looping via maliciously-constructed
+      // -string attacks
+    if ( code == 'part_divider' ) {
+      break buildhost;
+    } else {
+      host += code;
+      console.log( code, host );
+      host_decoder = host_tree;
+    }
+  }
+  console.log( host );
+  decoded += host + tld;
+  console.log( decoded );
+  let path_decoder = path_tree;
+  let path = '/';
+  buildpath: while( true ) {
+    let code = '';
+    buildcode: while( !path_decoder.morpheme ) {
+      const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
+      path_decoder = path_decoder[next_bit];
+    }
+    code = path_decoder.morpheme;
+    // FIXME: need another termination condition for this buildpath
+      // otherwise it's vulernable to infinite looping via maliciously-constructed
+      // -string attacks
+    if ( code == 'part_divider' ) {
+      break buildpath;
+    } else {
+      path += code;
+      console.log( code, path );
+      path_decoder = path_tree;
+    }
+  }
+  console.log( path );
+  decoded += path;
+  console.log( decoded );
+  let query_decoder = query_tree;
+  let query = '?';
+  let count = 0;
+  buildquery: while( true ) {
+    let code = '';
+    buildcode: while( !query_decoder.morpheme ) {
+      const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
+      query_decoder = query_decoder[next_bit];
+    }
+    code = query_decoder.morpheme;
+    // FIXME: need another termination condition for this buildquery
+      // otherwise it's vulernable to infinite looping via maliciously-constructed
+      // -string attacks
+    if ( code == 'slot_divider' ) {
+      count += 1;
+      if ( count % 2 == 0 ) {
+        query += '&';
+      } else {
+        query += '=';
+      }
+      query_decoder = query_tree;
+    } else if ( code == 'part_divider' ) {
+      break buildquery;
+    } else {
+      query += code;
+      console.log( code, query );
+      query_decoder = query_tree;
+    }
+  }
+  console.log( query );
+  decoded += query;
+  console.log( decoded );
 }
 function test() {
   parse(state);
