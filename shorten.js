@@ -285,7 +285,7 @@
     delete these_codes['array_divider'];
     delete these_codes['number_divider'];
     delete these_codes['part_divider'];
-    //console.log( these_codes, dividers );
+    console.log( these_codes, dividers );
     let compact = '';
     for( const name of order ) {
       compact += name + dividers[0]; 
@@ -302,11 +302,12 @@
       if ( name !== order.slice(-1)[0] ) {
         compact += dividers[0];
       } else {
-        console.log( dividers );
         compact += dividers[3];
+        console.log( dividers, compact );
       }
     }
     const coded = shrink( compact, these_codes );
+    console.log(coded);
     state.query = {
       compact, dividers, coded
     };
@@ -322,6 +323,8 @@
       const prefix = 8 - bits.length;
       return Array(prefix+1).join('0') + bits;
     } else {
+      console.log( "last", bits );
+      return bits;
       const prefix = last_length - bits.length;
       return Array(prefix+1).join('0') + bits;
     }
@@ -332,8 +335,11 @@
     //console.log( ">", bytes );
     const header = bytes.slice(0,2).map( b => toOctet(b) ).join('');
     const last_octet_length = parseInt(header.slice(6,9));
+    console.log( "LO", last_octet_length );
     const bits = bytes.map( (b,i) => toOctet( b, i == bytes.length - 1, last_octet_length ) );
-    return bits.join('');
+    const bs = bits.join('');
+    console.log('bs', bs);
+    return bs;
   }
 
   function decode( bs ) {
