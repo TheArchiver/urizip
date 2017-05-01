@@ -129,6 +129,11 @@
     );
   }
 
+  morphemes.push( {
+    morpheme: "part_divider",
+    cover: maxCover
+  });
+
   morphemes.sort( (a,b)=>b.cover - a.cover);
   morphemes.length = 1024;
   fs.writeFileSync( outfile_name, JSON.stringify( morphemes, null, 2 ), {encoding:'utf8'});

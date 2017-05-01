@@ -194,15 +194,22 @@
   function code_part( state, partname ) {
     const part = state.wordparts[partname];
     if ( !!part ) {
-      state[partname+'code'] = shrink( part, part_codes[partname+'_codes'] );
+      const codes = part_codes[partname+'_codes'];
+      state[partname+'code'] = shrink( part, codes );
       state.code += state[partname+'code'];
+      state.code += codes.general_divider;
     }
   }
 
   function code_parts( state ) {
-    const partnames = ["host", "path", "fragment"];
+    const partnames = ["host", "path", "query", "fragment"];
     for ( const partname of partnames ) {
-      code_part( state, partname );
+      if ( partname == 'query' ) {
+        code_query( state );
+        state.code += state.query.coded + query_codes.general_divider;
+      } else {
+        code_part( state, partname );
+      }
     }
   }
 
@@ -273,7 +280,6 @@
     state.query = {
       compact, dividers, coded
     };
-    return [ dividers, map, compact, coded ];
   }
 
   function stringify( state ) {
@@ -285,14 +291,7 @@
     code_scheme(state);
     code_tld( state );
     code_parts( state );
-    code_query( state );
-    if ( true || state.query.coded.length / 8 < state.url.query ) {
-      state.code += state.query.coded;
-      stringify( state );
-    } else {
-      stringify( state );
-      state.string += btoa(state.url.query);
-    }
+    stringify( state );
     console.log(state);
   }
 
