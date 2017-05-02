@@ -2,24 +2,13 @@
 {
   let { atob, btoa } = process;
   if ( !atob && !btoa ) {
-   try {
+    try {
      ({ atob, btoa } = require('./browser_api.js'));
-   } catch(e) {
-    console.warn(e);
-   }
+    } catch(e) {
+      console.warn(e);
+    }
   }
-  /* 
-    const tld_tree = JSON.parse( fs.readFileSync( 'tld_tree.json', {encoding:'utf8'} ) );
-    const host_tree = JSON.parse( fs.readFileSync( 'host_tree.json', {encoding:'utf8'} ) );
-    const path_tree = JSON.parse( fs.readFileSync( 'path_tree.json', {encoding:'utf8'} ) );
-    const query_tree = JSON.parse( fs.readFileSync( 'query_tree.json', {encoding:'utf8'} ) );
-    const fragment_tree = JSON.parse( fs.readFileSync( 'fragment_tree.json', {encoding:'utf8'} ) );
-    const host_codes = JSON.parse( fs.readFileSync( 'host_codes.json', {encoding:'utf8'} ) );
-    const path_codes = JSON.parse( fs.readFileSync( 'path_codes.json', {encoding:'utf8'} ) );
-    const query_codes = JSON.parse( fs.readFileSync( 'query_codes.json', {encoding:'utf8'} ) );
-    const fragment_codes = JSON.parse( fs.readFileSync( 'fragment_codes.json', {encoding:'utf8'} ) );
-    const tld_codes = JSON.parse( fs.readFileSync( 'tld_codes.json', {encoding:'utf8'} ) );
-  */
+
   const tld_tree = require('./tld_tree.js');
   const host_tree = require('./host_tree.js');
   const path_tree = require('./path_tree.js');
@@ -30,11 +19,17 @@
   const query_codes = require('./query_codes.js');
   const fragment_codes = require('./fragment_codes.js');
   const tld_codes = require('./tld_codes.js');
+
   const part_codes = {
     host_codes, path_codes, query_codes, fragment_codes
   };
 
   const tld_search_order = ["original", "other_common", "rest"];
+
+  if ( ! process.browser ) {
+    cli();
+  }
+  
 
   function shrink( word, codes ) {
     let encoding = ''
@@ -516,7 +511,7 @@
     console.log( JSON.stringify( [ url, encoded, decoded ], null, 2 ) );
   }
 
-  if ( ! process.browser ) {
-    cli();
-  }
+  module.exports = { urizip: {
+    encode, decode
+  }};
 }
