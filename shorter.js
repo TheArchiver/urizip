@@ -1,8 +1,9 @@
 "use strict";
 {
-  const btoa = require('btoa');
-  const atob = require('atob');
-  const fs = require('fs');
+  let { atob, btoa } = process;
+  if ( !atob && !btoa ) {
+   ({ atob, btoa } = require('./browser_api.js'));
+  }
   /* 
     const tld_tree = JSON.parse( fs.readFileSync( 'tld_tree.json', {encoding:'utf8'} ) );
     const host_tree = JSON.parse( fs.readFileSync( 'host_tree.json', {encoding:'utf8'} ) );
