@@ -150,10 +150,10 @@
     }
     const [ scheme, schemeless ] = url.split( /:\/\/(.+)/ );
     //console.log(scheme,schemeless);
-    const [ hostport, hostless ] = schemeless.split(/\/(.+)/ );
-    //console.log(hostport,hostless)
+    const [ hostport, hostless ] = schemeless.split(/\/(.*)/ );
+    console.log(hostport,hostless)
     const [ host, port ] = hostport.split(/:(.+)/);
-    //console.log(host,port)
+    console.log(host,port)
     let path, pathless;
     if ( !!hostless ) {
       ([path,pathless] = hostless.split(/\?(.+)/));

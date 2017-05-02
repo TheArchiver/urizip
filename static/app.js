@@ -370,7 +370,7 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
     }
     const [ scheme, schemeless ] = url.split( /:\/\/(.+)/ );
     //console.log(scheme,schemeless);
-    const [ hostport, hostless ] = schemeless.split(/\/(.+)/ );
+    const [ hostport, hostless ] = schemeless.split(/\/(.*)/ );
     //console.log(hostport,hostless)
     const [ host, port ] = hostport.split(/:(.+)/);
     //console.log(host,port)
