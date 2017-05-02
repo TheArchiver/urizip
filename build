@@ -19,19 +19,28 @@ node encode.js > codes.json
 node huffman.js host_dict.json > host_tree.json
 node encode.js host_tree.json > host_codes.json
 echo "module.exports = " `cat host_tree.json` ";" > host_tree.js
+echo "module.exports = " `cat host_codes.json` ";" > host_codes.js
 
 node huffman.js path_dict.json > path_tree.json
 node encode.js path_tree.json > path_codes.json
+echo "module.exports = " `cat path_tree.json` ";" > path_tree.js
+echo "module.exports = " `cat path_codes.json` ";" > path_codes.js
 
 node huffman.js query_dict.json > query_tree.json
 node encode.js query_tree.json > query_codes.json
+echo "module.exports = " `cat query_tree.json` ";" > query_tree.js
+echo "module.exports = " `cat query_codes.json` ";" > query_codes.js
 
 node huffman.js fragment_dict.json > fragment_tree.json
 node encode.js fragment_tree.json > fragment_codes.json
+echo "module.exports = " `cat fragment_tree.json` ";" > fragment_tree.js
+echo "module.exports = " `cat fragment_codes.json` ";" > fragment_codes.js
 
 node parse_tld.js > tld_dict.json
 node tld_huffman.js > tld_tree.json
 node tld_encode.js > tld_codes.json
+echo "module.exports = " `cat tld_tree.json` ";" > tld_tree.js
+echo "module.exports = " `cat tld_codes.json` ";" > tld_codes.js
 
 git add .
 git commit -m OK

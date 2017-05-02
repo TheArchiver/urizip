@@ -3,22 +3,32 @@
   const btoa = require('btoa');
   const atob = require('atob');
   const fs = require('fs');
-  const tld_tree = JSON.parse( fs.readFileSync( 'tld_tree.json', {encoding:'utf8'} ) );
-  const host_tree = JSON.parse( fs.readFileSync( 'host_tree.json', {encoding:'utf8'} ) );
-  const path_tree = JSON.parse( fs.readFileSync( 'path_tree.json', {encoding:'utf8'} ) );
-  const query_tree = JSON.parse( fs.readFileSync( 'query_tree.json', {encoding:'utf8'} ) );
-  const fragment_tree = JSON.parse( fs.readFileSync( 'fragment_tree.json', {encoding:'utf8'} ) );
-  const host_codes = JSON.parse( fs.readFileSync( 'host_codes.json', {encoding:'utf8'} ) );
-  const path_codes = JSON.parse( fs.readFileSync( 'path_codes.json', {encoding:'utf8'} ) );
-  const query_codes = JSON.parse( fs.readFileSync( 'query_codes.json', {encoding:'utf8'} ) );
-  const fragment_codes = JSON.parse( fs.readFileSync( 'fragment_codes.json', {encoding:'utf8'} ) );
+  /* 
+    const tld_tree = JSON.parse( fs.readFileSync( 'tld_tree.json', {encoding:'utf8'} ) );
+    const host_tree = JSON.parse( fs.readFileSync( 'host_tree.json', {encoding:'utf8'} ) );
+    const path_tree = JSON.parse( fs.readFileSync( 'path_tree.json', {encoding:'utf8'} ) );
+    const query_tree = JSON.parse( fs.readFileSync( 'query_tree.json', {encoding:'utf8'} ) );
+    const fragment_tree = JSON.parse( fs.readFileSync( 'fragment_tree.json', {encoding:'utf8'} ) );
+    const host_codes = JSON.parse( fs.readFileSync( 'host_codes.json', {encoding:'utf8'} ) );
+    const path_codes = JSON.parse( fs.readFileSync( 'path_codes.json', {encoding:'utf8'} ) );
+    const query_codes = JSON.parse( fs.readFileSync( 'query_codes.json', {encoding:'utf8'} ) );
+    const fragment_codes = JSON.parse( fs.readFileSync( 'fragment_codes.json', {encoding:'utf8'} ) );
+    const tld_codes = JSON.parse( fs.readFileSync( 'tld_codes.json', {encoding:'utf8'} ) );
+  */
+  const tld_tree = require('./tld_tree.js');
+  const host_tree = require('./host_tree.js');
+  const path_tree = require('./path_tree.js');
+  const query_tree = require('./query_tree.js');
+  const fragment_tree = require('./fragment_tree.js');
+  const host_codes = require('./host_codes.js');
+  const path_codes = require('./path_codes.js');
+  const query_codes = require('./query_codes.js');
+  const fragment_codes = require('./fragment_codes.js');
+  const tld_codes = require('./tld_codes.js');
   const part_codes = {
     host_codes, path_codes, query_codes, fragment_codes
   };
 
-  const tld_codes = JSON.parse(
-    fs.readFileSync( 'tld_codes.json', {encoding:'utf8'} )
-  );
   const tld_search_order = ["original", "other_common", "rest"];
 
   const state = {
