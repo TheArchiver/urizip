@@ -721,15 +721,16 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
     return state.string;
   }
 
-  function test() {
+  function cli() {
     const url = process.argv[2];
     const encoded = encode( url );
     const decoded = decode( encoded );
     console.log( JSON.stringify( [ url, encoded, decoded ], null, 2 ) );
   }
 
-
-  test()
+  if ( ! process.browser ) {
+    cli();
+  }
 }
 
 }).call(this,require('_process'))
