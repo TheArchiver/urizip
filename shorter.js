@@ -32,11 +32,6 @@
 
   const tld_search_order = ["original", "other_common", "rest"];
 
-  const state = {
-    url: process.argv[2],
-    code: '10' // format version 1 ( version is the count of 1s before the first 0 )
-  };
-
   function shrink( word, codes ) {
     let encoding = ''
     let code = '';
@@ -468,9 +463,9 @@
     return bs.splice(0, 1) == '1' ? 'https://' : 'http://';
   }
 
-  function decode( bs ) {
+  function decode( s ) {
+    const bs = lengthen(s).split('');
     let decoded = '';
-    bs = bs.split(''); 
     const format_version = decode_version( bs );
     console.log( "Version", format_version );
     const [ has_port, has_path, has_query, has_fragment ] = decode_presence( bs );
@@ -496,16 +491,25 @@
     return decoded;
   }
 
-  function test() {
+  function encode( url ) {
+    const state = {
+      url,
+      code: '10'
+    };
     parse(state);
     code_scheme(state);
     code_tld( state );
     code_parts( state );
     stringify( state );
     console.log(state);
-    const bits = lengthen( state.string );
-    const decoded = decode( bits );
-    console.log(decoded);
+    return state.string;
+  }
+
+  function test() {
+    const url = process.argv[2];
+    const encoded = encode( url );
+    const decoded = decode( encoded );
+    console.log( JSON.stringify( [ url, encoded, decoded ], null, 2 ) );
   }
 
 
