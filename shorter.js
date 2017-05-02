@@ -28,6 +28,8 @@
 
   if ( ! process.browser ) {
     cli();
+  } else {
+    process.urizip = { encode, decode };
   }
   
 
