@@ -465,6 +465,7 @@
   }
 
   function decode( s ) {
+    s = s.replace(':','/').replace('-','+');
     const bs = lengthen(s).split('');
     let decoded = '';
     const format_version = decode_version( bs );
@@ -503,7 +504,7 @@
     code_parts( state );
     stringify( state );
     console.log(state);
-    return state.string;
+    return state.string.replace('=','').replace('/',':').replace('+','-');
   }
 
   function cli() {

@@ -1,1 +1,43 @@
 <script src=app.js></script>
+<form id=encoder method=GET action=/#sorry-you-need-to-enable-js>
+  <fieldset>
+    <legend>Encoder</legend>
+    <p>
+      <input type=url size=140 name=url required>
+    <p>
+      <output></output>
+    <p>
+      <button>Encode</button>
+  </fieldset>
+</form>
+<form id=decoder method=GET action=/#sorry-you-need-to-enable-js>
+  <fieldset>
+    <legend>Decoder</legend>
+    <p>
+      <input type=encoded size=140 name=encoded required>
+    <p>
+      <output></output>
+    <p>
+      <button>Decode</button>
+  </fieldset>
+</form>
+<fieldset>
+  <legend>Compression Amount</legend>
+  <output></output>
+</fieldset>
+<script>
+  const [ encoder, decoder ] = document.querySelectorAll('form');
+  const [ encoded, decoded, compress_amount ] = document.querySelectorAll('fieldset output');
+  encoder.onsubmit = ev => {
+    ev.preventDefault();
+    encoded.value = urizip.encode( encoder.url.value ); 
+    compress_amount.value = Math.round((encoded.value.length / encoder.url.value.length ) * 100) + '%';
+    return false;
+  };
+  decoder.onsubmit = ev => {
+    ev.preventDefault();
+    decoded.value = urizip.decode( decoder.encoded.value );
+    compress_amount.value = Math.round((decoder.encoded.value.length / decoded.value.length ) * 100) + '%';
+    return false;
+  };
+</script>
