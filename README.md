@@ -25,4 +25,21 @@ Please check out the demo [https://urizip-dot-populace-soho.appspot.com/](https:
 
 If you have ideas on how to improve the compression, test it out first, and if it works, or you'd like to contributre, make a Pull Request! Thanks :D
 
+# Running and Building
+
+This was developed in NodeJS, and then bundled for the browser ( into app.js ) using `browserify`
+
+To run the code, clone the repo and type:
+
+`node shorten.js "<your url>"`
+
+To rebuild all the dictionaries and the browser bundle type 
+
+`./build`
+
+To just rebuild the browser bundle type
+
+`./rebuild_quick`
+
+
 
