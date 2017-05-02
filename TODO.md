@@ -1,6 +1,7 @@
 # TODO
 
--- Clean up code. Modularise functions. Remove repeat code. Refactor.
+-- Throw an error if a part contains invalid characters. 
+-- Make this releaseable on GitHub. Release it.
 -- Add the ability to detect "limited alphabet non-natural language" sections such as
 "NKBTS10423WT" and "aef1-d04c-a41d" and so on...We detect the alphabet, and the section length.
 Then we chunk it into sizes which can fit inside one JS integer. We turn it into integers. Then 

@@ -18,6 +18,7 @@ node encode.js > codes.json
 
 node huffman.js host_dict.json > host_tree.json
 node encode.js host_tree.json > host_codes.json
+echo "module.exports = " `cat host_tree.json` ";" > host_tree.js
 
 node huffman.js path_dict.json > path_tree.json
 node encode.js path_tree.json > path_codes.json

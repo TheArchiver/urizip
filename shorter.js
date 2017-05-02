@@ -20,6 +20,7 @@
     fs.readFileSync( 'tld_codes.json', {encoding:'utf8'} )
   );
   const tld_search_order = ["original", "other_common", "rest"];
+
   const state = {
     url: process.argv[2],
     code: '10' // format version 1 ( version is the count of 1s before the first 0 )
@@ -344,26 +345,72 @@
     return bs;
   }
 
-  function decode( bs ) {
+  function decode_part( bs, part_tree ) {
     let decoded = '';
-    bs = bs.split(''); 
-    //console.log( bs.slice(0,16) );
-    const format_version = bs.splice(0, 2);
-    console.log( "Version", format_version );
-    const presence = parseInt(bs.splice(0, 4).join(''));
-    const [ has_port, has_path, has_query, has_fragment ] = [ 
-      presence & 8,
-      presence & 4,
-      presence & 2,
-      presence & 1
-    ];
-    //console.log( presence );
-    const last_octet_length = parseInt(bs.splice(0, 3).join(''), 2);
-    //console.log( last_octet_length );
-    
-    const scheme = bs.splice(0, 1) == '1' ? 'https://' : 'http://';
-    //console.log( scheme );
-    decoded += scheme;
+    let part_decoder = part_tree;
+    let part = '';
+    buildpart: while( true ) {
+      let code = '';
+      buildcode: while( !part_decoder.morpheme ) {
+        const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
+        part_decoder = part_decoder[next_bit];
+      }
+      code = part_decoder.morpheme;
+      // FIXME: need another termination condition for this buildpart
+        // otherwise it's vulernable to infinite looping via maliciously-constructed
+        // -string attacks
+      if ( code == 'part_divider' ) {
+        break buildpart;
+      } else {
+        part += code;
+        //console.log( code, part );
+        part_decoder = part_tree;
+      }
+    }
+    //console.log( part );
+    decoded += part;
+    //console.log( decoded );
+    return decoded;
+  }
+
+  function decode_query( bs, query_tree ) {
+    let query_decoder = query_tree;
+    let query = '';
+    let count = 0;
+    let decoded = '';
+    buildquery: while( true ) {
+      let code = '';
+      buildcode: while( !query_decoder.morpheme ) {
+        const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
+        query_decoder = query_decoder[next_bit];
+      }
+      code = query_decoder.morpheme;
+      // FIXME: need another termination condition for this buildquery
+        // otherwise it's vulernable to infinite looping via maliciously-constructed
+        // -string attacks
+      if ( code == 'slot_divider' ) {
+        count += 1;
+        if ( count % 2 == 0 ) {
+          query += '&';
+        } else {
+          query += '=';
+        }
+        query_decoder = query_tree;
+      } else if ( code == 'part_divider' ) {
+        break buildquery;
+      } else {
+        query += code;
+        //console.log( code, query );
+        query_decoder = query_tree;
+      }
+    }
+    //console.log( query );
+    decoded += query;
+    //console.log( decoded );
+    return decoded;
+  }
+
+  function decode_tld( bs ) {
     const tld_bit0 = bs.splice(0, 1 )[0];
     let tld_groupname;
     if ( tld_bit0 == '0' ) {
@@ -386,124 +433,58 @@
     }
     const tld = tld_decoder.tld;
     //console.log( tld );
-    let host_decoder = host_tree;
-    let host = '';
-    buildhost: while( true ) {
-      let code = '';
-      buildcode: while( !host_decoder.morpheme ) {
-        const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
-        host_decoder = host_decoder[next_bit];
-      }
-      code = host_decoder.morpheme;
-      // FIXME: need another termination condition for this buildhost
-        // otherwise it's vulernable to infinite looping via maliciously-constructed
-        // -string attacks
-      if ( code == 'part_divider' ) {
-        break buildhost;
-      } else {
-        host += code;
-        //console.log( code, host );
-        host_decoder = host_tree;
-      }
-    }
-    //console.log( host );
-    decoded += host + tld;
+    return tld;
+  }
+
+  function decode_presence( bs ) {
+    const presence = parseInt(bs.splice(0, 4).join(''));
+    return [ 
+      presence & 8,
+      presence & 4,
+      presence & 2,
+      presence & 1
+    ];
+  }
+
+  function decode_version( bs ) {
+    const index_of_first_zero = bs.findIndex( b => b == '0' );
+    const version_prefix = bs.splice(0, index_of_first_zero + 1 );
+    const version = version_prefix.reduce( (v,b) => v + parseInt(b), 0 );
+    return version;
+  }
+
+  function decode_scheme( bs ) {
+    return bs.splice(0, 1) == '1' ? 'https://' : 'http://';
+  }
+
+  function decode( bs ) {
+    let decoded = '';
+    bs = bs.split(''); 
+    const format_version = decode_version( bs );
+    console.log( "Version", format_version );
+    const [ has_port, has_path, has_query, has_fragment ] = decode_presence( bs );
+    //console.log( presence );
+    const last_octet_length = parseInt(bs.splice(0, 3).join(''), 2);
+    //console.log( last_octet_length );
+    
+    const scheme = decode_scheme( bs );
+    //console.log( scheme );
+    decoded += scheme;
+    const tld = decode_tld( bs );
+    decoded += decode_part( bs, host_tree ) + tld;
     //console.log( decoded );
     if ( has_path ) {
-      let path_decoder = path_tree;
-      let path = '/';
-      buildpath: while( true ) {
-        let code = '';
-        buildcode: while( !path_decoder.morpheme ) {
-          const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
-          path_decoder = path_decoder[next_bit];
-        }
-        code = path_decoder.morpheme;
-        // FIXME: need another termination condition for this buildpath
-          // otherwise it's vulernable to infinite looping via maliciously-constructed
-          // -string attacks
-        if ( code == 'part_divider' ) {
-          break buildpath;
-        } else {
-          path += code;
-          //console.log( code, path );
-          path_decoder = path_tree;
-        }
-      }
-      //console.log( path );
-      decoded += path;
-      //console.log( decoded );
+      decoded += '/' + decode_part( bs, path_tree );
     }
     if ( has_query ) {
-      let query_decoder = query_tree;
-      let query = '?';
-      let count = 0;
-      buildquery: while( true ) {
-        let code = '';
-        buildcode: while( !query_decoder.morpheme ) {
-          const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
-          query_decoder = query_decoder[next_bit];
-        }
-        code = query_decoder.morpheme;
-        // FIXME: need another termination condition for this buildquery
-          // otherwise it's vulernable to infinite looping via maliciously-constructed
-          // -string attacks
-        if ( code == 'slot_divider' ) {
-          count += 1;
-          if ( count % 2 == 0 ) {
-            query += '&';
-          } else {
-            query += '=';
-          }
-          query_decoder = query_tree;
-        } else if ( code == 'part_divider' ) {
-          break buildquery;
-        } else {
-          query += code;
-          //console.log( code, query );
-          query_decoder = query_tree;
-        }
-      }
-      //console.log( query );
-      decoded += query;
-      //console.log( decoded );
+      decoded += '?' + decode_query( bs, query_tree );
     }
     if ( has_fragment ) {
-      let fragment_decoder = fragment_tree;
-      let fragment = '?';
-      let count = 0;
-      buildfragment: while( true ) {
-        let code = '';
-        buildcode: while( !fragment_decoder.morpheme ) {
-          const next_bit = bs.splice(0,1)[0] == '0' ? 'left' : 'right';  
-          fragment_decoder = fragment_decoder[next_bit];
-        }
-        code = fragment_decoder.morpheme;
-        // FIXME: need another termination condition for this buildfragment
-          // otherwise it's vulernable to infinite looping via maliciously-constructed
-          // -string attacks
-        if ( code == 'slot_divider' ) {
-          count += 1;
-          if ( count % 2 == 0 ) {
-            fragment += '&';
-          } else {
-            fragment += '=';
-          }
-          fragment_decoder = fragment_tree;
-        } else if ( code == 'part_divider' ) {
-          break buildfragment;
-        } else {
-          fragment += code;
-          //console.log( code, fragment );
-          fragment_decoder = fragment_tree;
-        }
-      }
-      //console.log( fragment );
-      decoded += fragment;
-      //console.log( decoded );
+      decoded += '#' + decode_part( bs, fragment_tree );
     }
     return decoded;
   }
+
   function test() {
     parse(state);
     code_scheme(state);
