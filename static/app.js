@@ -214,7 +214,11 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
 {
   let { atob, btoa } = process;
   if ( !atob && !btoa ) {
-   ({ atob, btoa } = require('./browser_api.js'));
+   try {
+     ({ atob, btoa } = require('./browser_api.js'));
+   } catch(e) {
+    console.warn(e);
+   }
   }
   /* 
     const tld_tree = JSON.parse( fs.readFileSync( 'tld_tree.json', {encoding:'utf8'} ) );
