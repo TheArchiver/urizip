@@ -1,0 +1,5 @@
+browserify shorter.js -u browser_api.js > static/app.js
+
+git add .
+git commit -m OK
+git push
