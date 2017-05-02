@@ -29,7 +29,7 @@
   if ( ! process.browser ) {
     cli();
   } else {
-    process.urizip = { encode, decode };
+    window.urizip = { encode, decode };
   }
   
 

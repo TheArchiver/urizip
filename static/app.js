@@ -241,7 +241,7 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
   if ( ! process.browser ) {
     cli();
   } else {
-    process.urizip = { encode, decode };
+    window.urizip = { encode, decode };
   }
   
 
