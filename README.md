@@ -18,3 +18,11 @@ I have a plan to improve this, but it is getting some gains that make me happy r
 # ALL IS GOOD!
 
 ( except for the code quality, and repository organization !! Like I said, this was "thrown" together very quickly, the only focus being on getting it to work! Thanks for reading :) )
+
+# Contributing
+
+Please check out the demo [https://urizip-dot-populace-soho.appspot.com/](https://urizip-dot-populace-soho.appspot.com/) and if you are so inclined make an issue.
+
+If you have ideas on how to improve the compression, test it out first, and if it works, or you'd like to contributre, make a Pull Request! Thanks :D
+
+
