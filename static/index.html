@@ -7,34 +7,61 @@
   output {
     font-family: monospace;
   }
+  h1 i {
+    font-size:3rem;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: -webkit-gradient(linear,  left top,  right bottom, 
+      color-stop(0.00, red), 
+      color-stop(16%, orange),
+      color-stop(32%, yellow),
+      color-stop(48%, green),
+      color-stop(60%, blue),
+      color-stop(76%, indigo),
+      color-stop(1.00, violet));
+    user-select:none;
+    -webkit-touch-callout: none;
+    padding: 0 1rem;
+  }
+  h1 i:hover, h1 i:active {
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: unset;
+  }
 </style>
 <script src=app.js></script>
-<form id=encoder method=GET action=/#sorry-you-need-to-enable-js>
+<header>
+  <h1>A serverless&trade;, distributed<sup>&copy;</sup> and static-site<sup>&reg;</sup> <i>URI shortener</i></h1>
+  <h2>100% Backend Free</h2>
+  <em>Run it where Good Static Sites<sup>&reg;</sup> may roam.</em>
+</header>
+<main>
+  <form id=encoder method=GET action=/#sorry-you-need-to-enable-js>
+    <fieldset>
+      <legend>Encoder</legend>
+      <p>
+        <input type=url size=140 name=url required>
+      <p>
+        <output></output>
+      <p>
+        <button>Encode</button>
+    </fieldset>
+  </form>
+  <form id=decoder method=GET action=/#sorry-you-need-to-enable-js>
+    <fieldset>
+      <legend>Decoder</legend>
+      <p>
+        <input type=encoded size=140 name=encoded required>
+      <p>
+        <output></output>
+      <p>
+        <button>Decode</button>
+    </fieldset>
+  </form>
   <fieldset>
-    <legend>Encoder</legend>
-    <p>
-      <input type=url size=140 name=url required>
-    <p>
-      <output></output>
-    <p>
-      <button>Encode</button>
+    <legend>Compression Amount</legend>
+    <output></output>
   </fieldset>
-</form>
-<form id=decoder method=GET action=/#sorry-you-need-to-enable-js>
-  <fieldset>
-    <legend>Decoder</legend>
-    <p>
-      <input type=encoded size=140 name=encoded required>
-    <p>
-      <output></output>
-    <p>
-      <button>Decode</button>
-  </fieldset>
-</form>
-<fieldset>
-  <legend>Compression Amount</legend>
-  <output></output>
-</fieldset>
+</main>
 <script>
   const [ encoder, decoder ] = document.querySelectorAll('form');
   const [ encoded, decoded, compress_amount ] = document.querySelectorAll('fieldset output');
@@ -51,3 +78,17 @@
     return false;
   };
 </script>
+<aside>
+  <h1>What are the limitations currently?</h1>
+  <ul>
+    <li>Only supports http and https URIs
+    <li>Only supports valid characters in URIs ( for example, no '[]' in the path, see <a href=https://tools.ietf.org/html/rfc3986>RFC 3986 URI: Generic Syntax</a> )
+    <li>Does not throw errors if something goes wrong ( it's in the TODO ).
+    <li>Has modest gains currently ( usually better than 4/3 increase of using Base64 without compressing the URI, and often, I find, below the original length of the URI itself ), tho some ( and not all ) improvement ideas are in the TODO.
+    <li>No support for unencoded non-ASCII characters in URIs. ( AFAICS this is not in RFC 3986 ). So please use PunyCode and Percent Encoding for out-of-band characters.
+  </ul>
+</aside>
+<footer>
+  <a href=>This site has a "GitHub" repository.</a>
+</footer>
+
