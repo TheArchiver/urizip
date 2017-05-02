@@ -374,7 +374,12 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
     //console.log(hostport,hostless)
     const [ host, port ] = hostport.split(/:(.+)/);
     //console.log(host,port)
-    const [ path, pathless ] = hostless.split(/\?(.+)/);
+    let path, pathless;
+    if ( !!hostless ) {
+      ([path,pathless] = hostless.split(/\?(.+)/));
+    } else {
+      path = ''; pathless = '';
+    }
     //console.log(path,pathless)
     let query, fragment;
     if ( !!pathless ) {
