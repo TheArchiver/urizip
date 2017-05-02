@@ -1,6 +1,6 @@
 "use strict";
 {
-  let { atob, btoa } = process;
+  let { atob, btoa } = window;
   if ( !atob && !btoa ) {
     try {
      ({ atob, btoa } = require('./browser_api.js'));
