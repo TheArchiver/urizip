@@ -716,7 +716,7 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
     code_parts( state );
     stringify( state );
     console.log(state);
-    return state.string.replace('=','').replace('/',':').replace('+','-');
+    return state.string.replace(/=/g,'').replace('/',':').replace('+','-');
   }
 
   function cli() {
