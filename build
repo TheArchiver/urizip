@@ -42,7 +42,7 @@ node tld_encode.js > tld_codes.json
 echo "module.exports = " `cat tld_tree.json` ";" > tld_tree.js
 echo "module.exports = " `cat tld_codes.json` ";" > tld_codes.js
 
-browserify shorter.js -u browser_api.js > app.js
+browserify shorter.js -u browser_api.js > static/app.js
 
 git add .
 git commit -m OK
