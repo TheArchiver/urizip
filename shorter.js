@@ -170,8 +170,8 @@
     }
     //console.log(path,pathless)
     let query, fragment;
-    if ( !!pathless ) {
-      ([ query, fragment ] = pathless.split(/#(.+)/));
+    if ( !!pathless || !!path ) {
+      ([ query, fragment ] = (pathless || path).split(/#(.+)/));
     }
 
     state.presencecode = [
