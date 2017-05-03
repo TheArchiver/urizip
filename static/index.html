@@ -63,8 +63,9 @@
   </fieldset>
 </main>
 <script>
-  const [ encoder, decoder ] = document.querySelectorAll('form');
-  const [ encoded, decoded, compress_amount ] = document.querySelectorAll('fieldset output');
+  let encoder, decoder, encoded, decoded, compress_amount;
+  ([ encoder, decoder ] = Array.from(document.querySelectorAll('form')));
+  ([ encoded, decoded, compress_amount ] = Array.from(document.querySelectorAll('fieldset output')));
   encoder.onsubmit = ev => {
     ev.preventDefault();
     encoded.value = urizip.encode( encoder.url.value ); 
