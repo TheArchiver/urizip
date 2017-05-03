@@ -382,6 +382,7 @@ module.exports =  { "left": { "left": { "left": { "left": { "left": { "left": { 
     }
     //console.log(path,pathless)
     let query, fragment;
+    // this is in case there is no query 
     if ( !!pathless ) {
       ([ query, fragment ] = pathless.split(/#(.+)/));
     } else if ( !!path ) {
