@@ -41,5 +41,17 @@ To just rebuild the browser bundle type
 
 `./rebuild_quick`
 
+To run the "website" you will need to have dev_appserver.py installed ( and Python 2.7 ). Install it by following instructions at [https://cloud.google.com/appengine/docs/standard/python/download](https://cloud.google.com/appengine/docs/standard/python/download)
+
+Then open another shell into the same directory and type:
+
+`dev_appserver.py ./`
+
+"website" will then be running at localhost:8080.
+
+You will need to `./rebuild_quick` when you make changes to repackage the app.js.
+
+Or you can come up with your own better workflow and maybe share it here, by opening an issue or PR! 
+
 
 
