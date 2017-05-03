@@ -159,9 +159,9 @@
     const [ scheme, schemeless ] = url.split( /:\/\/(.+)/ );
     //console.log(scheme,schemeless);
     const [ hostport, hostless ] = schemeless.split(/\/(.*)/ );
-    //console.log(hostport,hostless)
+    console.log(hostport,hostless)
     const [ host, port ] = hostport.split(/:(.+)/);
-    //console.log(host,port)
+    console.log(host,port)
     let path, pathless;
     if ( !!hostless ) {
       ([path,pathless] = hostless.split(/\?(.+)/));
@@ -170,10 +170,13 @@
     }
     //console.log(path,pathless)
     let query, fragment;
-    if ( !!pathless || !!path ) {
-      ([ query, fragment ] = (pathless || path).split(/#(.+)/));
+    if ( !!pathless ) {
+      ([ query, fragment ] = pathless.split(/#(.+)/));
+    } else if ( !!path ) {
+      ([ path, fragment ] = path.split(/#(.+)/));
     }
-
+    console.log(path,query,fragment);
+    
     state.presencecode = [
       `${ port ? 1:0}`,
       `${ path ? 1:0}`,

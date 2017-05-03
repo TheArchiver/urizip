@@ -164,8 +164,11 @@
     let query, fragment;
     if ( !!pathless ) {
       ([ query, fragment ] = pathless.split(/#(.+)/));
+    } else if ( !!path ) {
+      ([ path, fragment ] = path.split(/#(.+)/));
     }
-
+    console.log(path,query,fragment);
+    
     state.presencecode = [
       `${ port ? 1:0}`,
       `${ path ? 1:0}`,
@@ -475,7 +478,7 @@
     }
     if ( has_fragment ) {
       let fragment_decoder = fragment_tree;
-      let fragment = '?';
+      let fragment = '#';
       let count = 0;
       buildfragment: while( true ) {
         let code = '';
