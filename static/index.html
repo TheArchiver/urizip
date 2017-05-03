@@ -63,21 +63,24 @@
   </fieldset>
 </main>
 <script>
-  let encoder, decoder, encoded, decoded, compress_amount;
-  ([ encoder, decoder ] = Array.from(document.querySelectorAll('form')));
-  ([ encoded, decoded, compress_amount ] = Array.from(document.querySelectorAll('fieldset output')));
-  encoder.onsubmit = ev => {
-    ev.preventDefault();
-    encoded.value = urizip.encode( encoder.url.value ); 
-    compress_amount.value = Math.round((encoded.value.length / encoder.url.value.length ) * 100) + '% of original URI';
-    return false;
-  };
-  decoder.onsubmit = ev => {
-    ev.preventDefault();
-    decoded.value = urizip.decode( decoder.encoded.value );
-    compress_amount.value = Math.round((decoder.encoded.value.length / decoded.value.length ) * 100) + '% of original URI';
-    return false;
-  };
+  "use strict";
+  {
+    let encoder, decoder, encoded, decoded, compress_amount;
+    ([ encoder, decoder ] = Array.from(document.querySelectorAll('form')));
+    ([ encoded, decoded, compress_amount ] = Array.from(document.querySelectorAll('fieldset output')));
+    encoder.onsubmit = ev => {
+      ev.preventDefault();
+      encoded.value = urizip.encode( encoder.url.value ); 
+      compress_amount.value = Math.round((encoded.value.length / encoder.url.value.length ) * 100) + '% of original URI';
+      return false;
+    };
+    decoder.onsubmit = ev => {
+      ev.preventDefault();
+      decoded.value = urizip.decode( decoder.encoded.value );
+      compress_amount.value = Math.round((decoder.encoded.value.length / decoded.value.length ) * 100) + '% of original URI';
+      return false;
+    };
+  }
 </script>
 <aside>
   <h1>What are the limitations currently?</h1>
